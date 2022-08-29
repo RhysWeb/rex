@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './reviewsCreateUserPage.module.css';
 import Head from 'next/head';
 import { signIn, signOut, useSession } from 'next-auth/react';
@@ -16,10 +16,7 @@ const Contents = ({ session }) => {
 	};
 
 	const [userName, setUserName] = useState('');
-	const { data, refetch, isLoading } = trpc.useQuery([
-		'reviewsUser.getUser',
-		{ userId: session?.user?.id },
-	]);
+	const { data, isLoading } = trpc.useQuery(['reviewsUser.getUser']);
 
 	if (!session)
 		return (
@@ -83,27 +80,6 @@ const Contents = ({ session }) => {
 					margin="3rem 0 0 0"
 				/>
 			</div>
-
-			// <div>
-			// 	<div className={styles.main}>
-			// 		<h1 className={styles.title}>Hello {session.user?.name}</h1>
-			// 		<Image
-			// 			src={session.user?.image!}
-			// 			alt="User image"
-			// 			width="100px"
-			// 			height="100px"
-			// 			className={styles.userLogo}
-			// 		/>
-
-			// 		<ButtonOne
-			// 			text="Sign out"
-			// 			onClick={() => {
-			// 				signOut();
-			// 			}}
-			// 			margin="3rem 0 0 0"
-			// 		/>
-			// 	</div>
-			// </div>
 		);
 
 	return (
@@ -126,7 +102,7 @@ const Contents = ({ session }) => {
 	);
 };
 
-const ReviewsCreateUserPage: NextPage = ({}) => {
+const ReviewsCreateUserPage: NextPage = () => {
 	const { data: session, status } = useSession();
 	if (status === 'loading')
 		return (

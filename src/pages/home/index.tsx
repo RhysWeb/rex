@@ -105,6 +105,7 @@ const Contents = ({ session }) => {
 
 	const { data, isLoading } = trpc.useQuery([
 		'reviewsUser.getUser',
+		// @ts-ignore
 		{ userId: session?.user?.id },
 	]);
 	if (isLoading) return <Loading />;
