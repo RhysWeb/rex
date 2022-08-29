@@ -67,10 +67,9 @@ export const NotSignedIn: React.FC<Props> = ({}) => {
 				placeholder="blur"
 				blurDataURL="/friends4.jpg"
 			/>
-			<h1 className={styles.title}>TV Rex</h1>
+			<h1 className={styles.title}>Recs</h1>
 			<h2 className={styles.subHeading}>
-				A site for friends to give and receive film and television
-				recommendations
+				A site for friends to give and receive recommendations
 			</h2>
 			<p className={styles.note}>...and rate each other on their choices</p>
 
