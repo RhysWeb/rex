@@ -1,0 +1,46 @@
+.main {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+}
+
+.topRow {
+	grid-column: 1 / span 3;
+	grid-row: 1;
+	display: flex;
+	justify-content: left;
+	align-items: flex-end;
+	width: 100%;
+	border: 1px solid var(--gray-9);
+}
+
+.nameBadge {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border: solid red 1px;
+	padding: 1rem;
+	border-radius: 10px;
+}
+
+.name {
+	align-self: center;
+	justify-self: center;
+	font-family: var(--font-mono);
+	font-size: var(--font-size-fluid-2);
+	font-weight: var(--font-weight-5);
+	color: var(--text1);
+}
+
+.imageContainer {
+	height: 4rem;
+	width: 4rem;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.title {
+	margin-top: var(--size-fluid-3);
+	font-size: var(--font-size-fluid-3);
+	text-align: center;
+}

@@ -1,0 +1,70 @@
+.main {
+	/* margin-top: 100px; */
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	width: 100%;
+}
+
+.title {
+	margin-block: var(--size-fluid-3);
+	font-size: var(--font-size-fluid-3);
+	text-align: center;
+	color: var(--brand);
+	text-shadow: var(--gray-9) 0.1em 0.1em 0.2em;
+	z-index: 1;
+}
+
+.subHeading {
+	text-align: center;
+	width: clamp(300px, 50%, 800px);
+	min-width: 80vwpx;
+	font-size: var(--font-size-fluid-2);
+	margin-top: var(--size-fluid-3);
+	padding-top: var(--size-fluid-3);
+	z-index: 1;
+}
+
+.note {
+	background-color: hsl(0, 0%, 90%, 0.3);
+	border-radius: 10px;
+	padding: 0.1rem 0.7rem;
+	font-weight: var(--font-weight-5);
+	margin-top: 1rem;
+	z-index: 1;
+}
+
+.itsFree {
+	background-color: hsl(0, 0%, 90%, 0.2);
+	border-radius: 10px;
+	padding: 0.1rem 0.7rem;
+	margin-top: var(--size-fluid-1);
+	z-index: 1;
+	font-weight: var(--font-weight-5);
+}
+
+.image {
+	opacity: 0.4;
+	z-index: -1;
+}
+
+.buttonDiv {
+	z-index: 1000;
+	isolation: isolate;
+}
+
+.navBar {
+	transform: translateY(-60px);
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	z-index: 1;
+}
+
+.navIcon {
+	stroke: var(--text1);
+	fill: var(--brand2);
+	cursor: pointer;
+	z-index: 10;
+}

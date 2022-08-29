@@ -1,0 +1,22 @@
+/* container holds the nav and sets the max widthof the content */
+
+.layoutContainer {
+	width: 100vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.navBar {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.navIcon {
+	stroke: var(--text1);
+	fill: var(--brand2);
+	cursor: pointer;
+	z-index: 10;
+}

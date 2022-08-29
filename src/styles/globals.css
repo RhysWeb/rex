@@ -1,16 +1,151 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@import 'open-props/style';
+@import 'open-props/normalize';
+@import 'open-props/buttons';
+
+html {
+	/* light mode colours */
+	--brand-light: var(--orange-4);
+	--brand2-light: var(--orange-2);
+	--brandSecondary-light: var(--blue-3);
+	--text1-light: var(--gray-8);
+	--text2-light: var(--gray-7);
+	--link-light: var(--blue-9);
+	--surface1-light: var(--gray-2);
+	--surface2-light: var(--gray-0);
+	--surface3-light: var(--gray-1);
+	--surface4-light: var(--gray-3);
+
+	/* dark mode colours */
+	--brand-dark: var(--orange-5);
+	--brand2-dark: var(--orange-2);
+	--brandSecondary-dark: var(--blue-3);
+	--text1-dark: var(--gray-1);
+	--text2-dark: var(--gray-3);
+	--link-dark: var(--blue-2);
+	--surface1-dark: var(--gray-9);
+	--surface2-dark: var(--gray-8);
+	--surface3-dark: var(--gray-7);
+	--surface4-dark: var(--gray-6);
+
+	/* dim mode colours */
+	--brand-dim: var(--orange-4);
+	--brand2-dim: var(--orange-1);
+	--brandSecondary-dim: var(--blue-1);
+	--text1-dim: var(--gray-3);
+	--text2-dim: var(--gray-4);
+	--link-dim: var(--blue-4);
+	--surface1-dim: var(--gray-8);
+	--surface2-dim: var(--gray-7);
+	--surface3-dim: var(--gray-6);
+	--surface4-dim: var(--gray-5);
+
+	/* grape mode colours */
+	--brand-grape: var(--grape-5);
+	--brand2-grape: var(--grape-2);
+	--brandSecondary-grape: var(--gray-2);
+	--text1-grape: var(--grape-9);
+	--text2-grape: var(--grape-7);
+	--link-grape: var(--blue-4);
+	--surface1-grape: var(--grape-0);
+	--surface2-grape: var(--grape-1);
+	--surface3-grape: var(--grape-2);
+	--surface4-grape: var(--grape-3);
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+:root {
+	--brand: var(--brand-light);
+	--brand2: var(--brand2-light);
+	--brandSecondary: var(--brandSecondary-light);
+	--text1: var(--text1-light);
+	--text2: var(--text2-light);
+	--link: var(--link-light);
+	--surface1: var(--surface1-light);
+	--surface2: var(--surface2-light);
+	--surface3: var(--surface3-light);
+	--surface4: var(--surface4-light);
 }
 
-* {
-  box-sizing: border-box;
+@media (prefers-color-scheme: dark) {
+	:root {
+		--brand: var(--brand-dark);
+		--brand2: var(--brand2-dark);
+		--brandSecondary: var(--brandSecondary-dark);
+		--text1: var(--text1-dark);
+		--text2: var(--text2-dark);
+		--link: var(--link-dark);
+		--surface1: var(--surface1-dark);
+		--surface2: var(--surface2-dark);
+		--surface3: var(--surface3-dark);
+		--surface4: var(--surface4-dark);
+	}
+}
+
+@media (prefers-contrast: less) {
+	:root {
+		--brand: var(--brand-dim);
+		--brand2: var(--brand2-dim);
+		--brandSecondary: var(--brandSecondary-dim);
+		--text1: var(--text1-dim);
+		--text2: var(--text2-dim);
+		--link: var(--link-dim);
+		--surface1: var(--surface1-dim);
+		--surface2: var(--surface2-dim);
+		--surface3: var(--surface3-dim);
+		--surface4: var(--surface4-dim);
+	}
+}
+
+[color-scheme='grape'] {
+	--brand: var(--brand-grape);
+	--brand2: var(--brand2-grape);
+	--brandSecondary: var(--brandSecondary-grape);
+	--text1: var(--text1-grape);
+	--text2: var(--text2-grape);
+	--link: var(--link-grape);
+	--surface1: var(--surface1-grape);
+	--surface2: var(--surface2-grape);
+	--surface3: var(--surface3-grape);
+	--surface4: var(--surface4-grape);
+}
+
+html {
+	background-color: var(--surface1);
+	color: var(--text1);
+	accent-color: var(--link);
+}
+
+.surface1 {
+	background-color: var(--surface1);
+	color: var(--text2);
+}
+
+.surface2 {
+	background-color: var(--surface2);
+	color: var(--text2);
+}
+
+.surface3 {
+	background-color: var(--surface3);
+	color: var(--text1);
+}
+
+.surface4 {
+	background-color: var(--surface4);
+	color: var(--text1);
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+dt {
+	color: var(--text1);
+}
+
+h5,
+h6,
+small,
+dd {
+	color: var(--text2);
 }
