@@ -16,7 +16,10 @@ const Contents = ({ session }) => {
 	};
 
 	const [userName, setUserName] = useState('');
-	const { data, isLoading } = trpc.useQuery(['reviewsUser.getUser']);
+	const { data, isLoading } = trpc.useQuery([
+		'reviewsUser.getUser',
+		{ userId: session?.user?.id },
+	]);
 
 	if (!session)
 		return (
