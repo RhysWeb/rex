@@ -1,35 +1,32 @@
 .main {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	width: 100%;
 }
 
-.topRow {
-	grid-column: 1 / span 3;
-	grid-row: 1;
+.hero {
 	display: flex;
-	justify-content: left;
-	align-items: flex-end;
-	width: 100%;
-	border: 1px solid var(--gray-9);
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: stretch;
+	background-color: #fff;
+}
+
+.button {
+	width: 95vw;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: center;
 }
 
 .nameBadge {
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	justify-content: stretch;
 	align-items: center;
-	border: solid red 1px;
 	padding: 1rem;
 	border-radius: 10px;
-}
-
-.name {
-	align-self: center;
-	justify-self: center;
-	font-family: var(--font-mono);
-	font-size: var(--font-size-fluid-2);
-	font-weight: var(--font-weight-5);
-	color: var(--text1);
 }
 
 .imageContainer {
@@ -39,8 +36,19 @@
 	overflow: hidden;
 }
 
-.title {
-	margin-top: var(--size-fluid-3);
-	font-size: var(--font-size-fluid-3);
-	text-align: center;
+.name {
+	align-self: center;
+	justify-self: center;
+	font-family: var(--font-mono);
+	font-size: var(--font-size-6);
+	font-weight: var(--font-weight-5);
+	color: var(--text1);
+	margin-left: 1rem;
+}
+
+.recDiv {
+	border: red 1px solid;
+	width: 100%;
+	display: grid;
+	place-items: center;
 }

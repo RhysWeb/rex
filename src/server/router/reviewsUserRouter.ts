@@ -29,21 +29,3 @@ export const reviewsUserRouter = createRouter()
 			return userInfo;
 		},
 	});
-
-// .mutation('addComment', {
-// 	input: z.object({
-// 		text: z.string(),
-// 		author: z.string(),
-// 	}),
-// 	async resolve({ input }) {
-// 		const commentInDb = await prisma.comment.create({
-// 			data: {
-// 				text: input.text,
-// 				author: input.author,
-// 			},
-// 		});
-// 		console.log(commentInDb);
-// 		return commentInDb;
-// 	},
-// }
-// );

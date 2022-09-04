@@ -8,6 +8,7 @@ import Image from 'next/image';
 
 const Contents = () => {
 	const { data: session } = useSession();
+
 	// const { push, asPath } = useRouter();
 
 	// const handleSignOut = async () => {

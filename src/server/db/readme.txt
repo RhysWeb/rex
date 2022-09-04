@@ -4,7 +4,10 @@
 # or
 # pscale connect recs main --port 3309
 
-You make changes to your schema on yr project and push these changes to the dev branch using: 'npx prisma db push'
+You make changes to your schema on yr project then:
+1. npm install (this generates prisma, whatever that means)
+1b You might also have to "npx prisma format"
+2. push the changes to the dev branch using: 'npx prisma db push'
 
 Note: You can test your changes by running: 'npx prisma studio' and adding an entry
 

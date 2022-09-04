@@ -8,121 +8,51 @@ import { useRouter } from 'next/router';
 import { NotSignedIn } from '../../components/NotSignedInContent/NotSignedIn';
 import { Loading } from '../../components/Loading/Loading';
 import Image from 'next/image';
+import { useForm, useWatch } from 'react-hook-form';
+import ButtonOne from '../../components/ButtonOne/ButtonOne';
+import { useState } from 'react';
+import { NewRecForm } from '../../components/NewRecForm/NewRecForm';
+import { Recommendation } from '../../components/Recommendation/Recommendation';
 
-type Recommendation = {
-	id: number;
-	title: string;
-	description: string;
-	rating: number;
+const trpcOptions = {
+	refetchInterval: false,
+	refetchOnReconnect: false,
+	refetchOnWindowFocus: false,
 };
-
-type FakeReviewer = {
-	id: number;
-	name: string;
-	rating: number;
-};
-
-type FakeFriends = {
-	id: number;
-	name: string;
-	rating: number;
-};
-
-const reviewer = [];
-const recommendations: Recommendation[] = [
-	{
-		id: 1,
-		title: 'E.T. The Extra-Terrestrial',
-		description:
-			'A young alien who is accidentally sent thirty years into the past in a search for his missing father.',
-		rating: 8.8,
-	},
-	{
-		id: 2,
-		title: 'Top Gun',
-		description:
-			'American Maverick lives in Katoomba, Australia. He has a best friend, a friend who is a pilot, and a friend who is a soldier. He is a good friend, but he is a bad friend.',
-		rating: 8.0,
-	},
-	{
-		id: 3,
-
-		title: 'The Godfather',
-		description:
-			'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.',
-		rating: 9.2,
-	},
-];
-
-const fakeReviewers: FakeReviewer[] = [
-	{
-		id: 1,
-		name: 'John Doe',
-		rating: 8.8,
-	},
-	{
-		id: 2,
-		name: 'Jane Doe',
-		rating: 8.0,
-	},
-	{
-		id: 3,
-		name: 'Jack Doe',
-		rating: 9.2,
-	},
-];
-
-const fakeFriends: FakeFriends[] = [
-	{
-		id: 1,
-		name: 'John Doe',
-		rating: 8.8,
-	},
-	{
-		id: 2,
-		name: 'Jane Doe',
-		rating: 8.0,
-	},
-	{
-		id: 3,
-		name: 'Jack Doe',
-		rating: 9.2,
-	},
-];
 
 // @ts-ignore
 const Contents = ({ session }) => {
-	// session: {user: {
-	//     name?: string | null;
-	//     email?: string | null;
-	//     image?: string | null;
-	//     id: string | null;
-	//     role?: enum;}
+	// Get the user data (recsUser)
+	const { data: recsUser, isLoading } = trpc.useQuery(
+		['reviewsUser.getUser', { userId: session?.user?.id }],
+		// @ts-ignore
+		trpcOptions
+	);
+	// Get the users recommendations
+	const { data: recommendations, refetch } = trpc.useQuery(
+		['recommendation.getRecommendations', { authorId: session.user.id }],
+		// @ts-ignore
+		trpcOptions
+	);
 
-	// {"user":{"id":"cl72e6nh00006ew6jvo8nhujy","role":"USER","name":"RhysB","email":"rhysbalmforth@gmail.com","image":"https://lh3.googleusercontent.com/a-/AFdZucrXxFLUaiVAseXuINpMzZX30gdDSJqOZdW9c6Y86Dc=s96-c"},"expires":"2022-09-21T21:59:56.077Z"}
-
+	//State for toggling the 'new recommendation' view
+	const [viewNewRec, setNewRec] = useState(false);
+	function toggleNewComment() {
+		setNewRec(!viewNewRec);
+	}
 	const router = useRouter();
 
-	const { data, isLoading } = trpc.useQuery([
-		'reviewsUser.getUser',
-		// @ts-ignore
-		{ userId: session?.user?.id },
-	]);
 	if (isLoading) return <Loading />;
-	if (!data) router.push('/createUser');
-	// data:{"id":2,"authUserId":"cl6msy20u00170gmari8z92j8","createdAt":"2022-08-21T13:49:12.661Z","updatedAt":"2022-08-21T13:49:12.662Z","userName":"Bob"}
-
-	// If we have session and the session userid is in our validated users db then the homepage is shown below
-	if (data)
+	if (!recsUser) router.push('/createUser');
+	if (recsUser)
 		return (
 			<div className={styles.main}>
-				<div className={styles.topRow}>
+				<div className={styles.hero}>
 					<div className={styles.nameBadge}>
-						<div className={styles.name}>{data.userName}</div>
 						<div className={styles.imageContainer}>
 							<Image
 								src={session.user.image}
-								alt="bollocks"
+								alt="user Image"
 								width={1000}
 								height={1000}
 								className={styles.icon}
@@ -130,48 +60,42 @@ const Contents = ({ session }) => {
 								blurDataURL={session.user.image}
 							/>
 						</div>
+						<div className={styles.name}>{recsUser.userName}</div>
 					</div>
-					<ButtonTwo
-						text="Sign out"
-						onClick={() => {
-							signOut();
-						}}
-						margin="3rem 0 0 0"
-					/>
+					<button>sign out</button>
 				</div>
-				<div className={styles.filler}>
-					<div>Your recommendations</div>
-					<div>
-						{recommendations.map((r) => (
-							<div key={r.id}>
-								<div>{r.title}</div>
-								<div>{r.description}</div>
-								<div>{r.rating}</div>
-							</div>
-						))}
+
+				<div className={styles.content}>
+					<div className={styles.button}>
+						<ButtonOne
+							text="Add rec"
+							onClick={toggleNewComment}
+							margin="1rem 0 2rem 0"
+						/>
 					</div>
-				</div>
-				<div className={styles.filler}>
-					<div>Your top reviewers</div>
-					<div>
-						{fakeReviewers.map((r) => (
-							<div key={r.id}>
-								<div>{r.name}</div>
-								<div>{r.rating}</div>
+					{viewNewRec && (
+						<div className={styles.recDiv}>
+							<NewRecForm
+								refetch={refetch}
+								setNewRec={setNewRec}
+								authorId={session.user.id}
+							/>
+						</div>
+					)}
+
+					{recommendations ? (
+						recommendations.recs.map((rec) => (
+							<div key={rec.id} className={styles.recDiv}>
+								<Recommendation
+									name={rec.recName}
+									detail={rec.recDetail}
+									category={rec.reviewCategory}
+								/>
 							</div>
-						))}
-					</div>
-				</div>
-				<div className={styles.filler}>
-					<div>Your friends leaderboard</div>
-					<div>
-						{fakeFriends.map((r) => (
-							<div key={r.id}>
-								<div>{r.name}</div>
-								<div>{r.rating}</div>
-							</div>
-						))}
-					</div>
+						))
+					) : (
+						<Loading />
+					)}
 				</div>
 			</div>
 		);
