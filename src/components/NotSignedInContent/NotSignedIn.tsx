@@ -79,6 +79,7 @@ export const NotSignedIn: React.FC<Props> = ({}) => {
 				onClick={() => {
 					signIn('google');
 				}}
+				disabled={false}
 			/>
 
 			<p className={styles.itsFree}>It&apos;s free</p>
