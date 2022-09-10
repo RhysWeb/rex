@@ -24,7 +24,7 @@ const trpcOptions = {
 const Contents = ({ session }) => {
 	// Get the user data (recsUser)
 	const { data: recsUser, isLoading } = trpc.useQuery(
-		['reviewsUser.getUser', { userId: session?.user?.id }],
+		['reviewsUser.getUser', { userId: session.user.id }],
 		// @ts-ignore
 		trpcOptions
 	);
