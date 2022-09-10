@@ -1,38 +1,15 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-
-// import Link from 'next/link';
 import styles from './Layout.module.css';
-
 import Link from 'next/link';
 
-// export const NavItem: React.FC<Props> = ({ href, text }) => {
-//	router is used to get the url
-// 	const router = useRouter();
-// 	const isActive = router.asPath === href;
-
-// 	return (
-// 		<Link href={href}>
-// 			<a
-// 				className={
-// 					isActive
-// 						? `${styles.link} ${styles.selected}`
-// 						: `${styles.link} ${styles.notSelected}`
-// 				}
-// 			>
-// 				<span className="capsize">{text}</span>
-// 			</a>
-// 		</Link>
-// 	);
-// };
-
-export const Layout: React.FC<any> = (props) => {
+export const Layout = (props) => {
 	const router = useRouter();
 
 	const { children, ...customMeta } = props;
 	const meta = {
 		title: 'Rhys.fyi',
-		description: `Personal site containing chem eng design tools, movie reviews, and other projects`,
+		description: `A site to make recommendations and get reviewed on them`,
 		type: 'website',
 		...customMeta,
 	};
@@ -42,7 +19,6 @@ export const Layout: React.FC<any> = (props) => {
 			<Head>
 				<meta name="robots" content="follow, index" />
 				<meta content={meta.description} name="description" />
-
 				<link
 					rel="apple-touch-icon"
 					sizes="180x180"
@@ -61,7 +37,6 @@ export const Layout: React.FC<any> = (props) => {
 					href="/favicon-16x16.png"
 				/>
 				<link rel="manifest" href="/site.webmanifest" />
-
 				<meta property="og:type" content={meta.type} />
 				<meta property="og:site_name" content="Chem Eng" />
 				<meta property="og:description" content={meta.description} />

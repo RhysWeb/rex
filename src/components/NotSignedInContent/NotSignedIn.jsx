@@ -5,9 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-interface Props {}
-
-export const NotSignedIn: React.FC<Props> = ({}) => {
+export const NotSignedIn = () => {
 	const router = useRouter();
 	return (
 		<div className={styles.main}>

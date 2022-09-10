@@ -1,8 +1,7 @@
-import styles from './reviewsPage.module.css';
+import styles from './recsHomePage.module.css';
 import Head from 'next/head';
 import { signOut, useSession } from 'next-auth/react';
 import { trpc } from '../../utils/trpc';
-import { useRouter } from 'next/router';
 import { NotSignedIn } from '../../components/NotSignedInContent/NotSignedIn';
 import { Loading } from '../../components/Loading/Loading';
 import Image from 'next/image';
@@ -10,21 +9,23 @@ import ButtonOne from '../../components/ButtonOne/ButtonOne';
 import { useState } from 'react';
 import { NewRecForm } from '../../components/NewRecForm/NewRecForm';
 import { Recommendation } from '../../components/Recommendation/Recommendation';
+import CreateUser from '../../components/CreateUser/CreateUser';
+
 const trpcOptions = {
 	refetchInterval: false,
 	refetchOnReconnect: false,
 	refetchOnWindowFocus: false,
 };
 
-const ReviewsCreateUserPage = ({}) => {
-	const { data: session, status } = useSession();
+const RecsHomePage = ({}) => {
+	const { data: session, status: sessionStatus } = useSession();
 
 	return (
 		<>
 			<Head>
 				<title>Reviews</title>
 			</Head>
-			{status === 'loading' ? (
+			{sessionStatus === 'loading' ? (
 				<Loading />
 			) : session ? (
 				<Contents session={session} />
@@ -36,26 +37,31 @@ const ReviewsCreateUserPage = ({}) => {
 };
 
 const Contents = ({ session }) => {
-	// Get the user data (recsUser)
-	const { data: recsUser, isLoading } = trpc.useQuery(
+	// Get the user data (recsUser). Remember that this component only loads once we have a session.
+	const {
+		data: recsUser,
+		isLoading: gettingUser,
+		refetch: refetchUser,
+	} = trpc.useQuery(
 		['reviewsUser.getUser', { userId: session.user.id }],
 		trpcOptions
 	);
 	// Get the users recommendations
-	const { data: recommendations, refetch } = trpc.useQuery(
-		['recommendation.getRecommendations', { authorId: session.user.id }],
-		trpcOptions
-	);
+	const { data: recommendations, refetch: refetchRecommendations } =
+		trpc.useQuery(
+			['recommendation.getRecommendations', { authorId: session.user.id }],
+			trpcOptions
+		);
 
 	//State for toggling the 'new recommendation' view
 	const [viewNewRec, setNewRec] = useState(false);
 	function toggleNewComment() {
 		setNewRec(!viewNewRec);
 	}
-	const router = useRouter();
 
-	if (isLoading) return <Loading />;
-	if (!recsUser) router.push('/createUser');
+	if (gettingUser) return <Loading />;
+	if (!recsUser)
+		return <CreateUser session={session} refetchUser={refetchUser} />;
 	if (recsUser)
 		return (
 			<div className={styles.main}>
@@ -74,14 +80,16 @@ const Contents = ({ session }) => {
 						</div>
 						<div className={styles.name}>{recsUser.userName}</div>
 					</div>
-					<ButtonOne
-						text="Sign out"
-						onClick={() => {
-							signOut();
-						}}
-						margin="3rem 0 0 0"
-						disabled={false}
-					/>
+					<div className={styles.logOutButtonContainer}>
+						<ButtonOne
+							text="Sign out"
+							onClick={() => {
+								signOut();
+							}}
+							margin="0 0 0 0"
+							disabled={false}
+						/>
+					</div>
 				</div>
 
 				<div className={styles.content}>
@@ -96,7 +104,7 @@ const Contents = ({ session }) => {
 					{viewNewRec && (
 						<div className={styles.recDiv}>
 							<NewRecForm
-								refetch={refetch}
+								refetch={refetchRecommendations}
 								setNewRec={setNewRec}
 								authorId={session.user.id}
 							/>
@@ -123,4 +131,4 @@ const Contents = ({ session }) => {
 	return <Loading />;
 };
 
-export default ReviewsCreateUserPage;
+export default RecsHomePage;

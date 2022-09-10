@@ -89,15 +89,6 @@ export const NewRecForm: React.FC<Props> = ({
 					{selectOptions}
 				</select>
 			</label>
-			{/* <label className={styles.label} htmlFor="name">
-				Name:{' '}
-				<input {...register('author')} type="text" className={styles.input} />
-			</label>
-			<div className={styles.gap} />
-			<label className={styles.label} htmlFor="text">
-				Comment:{' '}
-				<textarea {...register('text')} className={styles.input} rows={3} />
-			</label> */}
 
 			<div className={styles.gap} />
 			<input
