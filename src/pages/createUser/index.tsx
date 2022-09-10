@@ -32,6 +32,7 @@ const Contents = ({ session }) => {
 					onClick={() => {
 						signIn('google');
 					}}
+					disabled={false}
 				/>
 			</div>
 		);
