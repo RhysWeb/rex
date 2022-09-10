@@ -38,6 +38,7 @@ const RecsHomePage = ({}) => {
 
 const Contents = ({ session }) => {
 	// Get the user data (recsUser). Remember that this component only loads once we have a session.
+	console.log('calling trpc getUser');
 	const {
 		data: recsUser,
 		isLoading: gettingUser,
@@ -47,6 +48,7 @@ const Contents = ({ session }) => {
 		trpcOptions
 	);
 	// Get the users recommendations
+	console.log('calling trpc getRecommendations');
 	const { data: recommendations, refetch: refetchRecommendations } =
 		trpc.useQuery(
 			['recommendation.getRecommendations', { authorId: session.user.id }],
