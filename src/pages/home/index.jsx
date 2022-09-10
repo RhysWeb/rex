@@ -1,37 +1,49 @@
-import type { NextPage } from 'next';
 import styles from './reviewsPage.module.css';
 import Head from 'next/head';
 import { signOut, useSession } from 'next-auth/react';
-import ButtonTwo from '../../components/ButtonTwo/ButtonTwo';
 import { trpc } from '../../utils/trpc';
 import { useRouter } from 'next/router';
 import { NotSignedIn } from '../../components/NotSignedInContent/NotSignedIn';
 import { Loading } from '../../components/Loading/Loading';
 import Image from 'next/image';
-import { useForm, useWatch } from 'react-hook-form';
 import ButtonOne from '../../components/ButtonOne/ButtonOne';
 import { useState } from 'react';
 import { NewRecForm } from '../../components/NewRecForm/NewRecForm';
 import { Recommendation } from '../../components/Recommendation/Recommendation';
-
 const trpcOptions = {
 	refetchInterval: false,
 	refetchOnReconnect: false,
 	refetchOnWindowFocus: false,
 };
 
-// @ts-ignore
+const ReviewsCreateUserPage = ({}) => {
+	const { data: session, status } = useSession();
+
+	return (
+		<>
+			<Head>
+				<title>Reviews</title>
+			</Head>
+			{status === 'loading' ? (
+				<Loading />
+			) : session ? (
+				<Contents session={session} />
+			) : (
+				<NotSignedIn />
+			)}
+		</>
+	);
+};
+
 const Contents = ({ session }) => {
 	// Get the user data (recsUser)
 	const { data: recsUser, isLoading } = trpc.useQuery(
 		['reviewsUser.getUser', { userId: session.user.id }],
-		// @ts-ignore
 		trpcOptions
 	);
 	// Get the users recommendations
 	const { data: recommendations, refetch } = trpc.useQuery(
 		['recommendation.getRecommendations', { authorId: session.user.id }],
-		// @ts-ignore
 		trpcOptions
 	);
 
@@ -109,25 +121,6 @@ const Contents = ({ session }) => {
 		);
 
 	return <Loading />;
-};
-
-const ReviewsCreateUserPage: NextPage = ({}) => {
-	const { data: session, status } = useSession();
-
-	return (
-		<>
-			<Head>
-				<title>Reviews</title>
-			</Head>
-			{status === 'loading' ? (
-				<Loading />
-			) : session ? (
-				<Contents session={session} />
-			) : (
-				<NotSignedIn />
-			)}
-		</>
-	);
 };
 
 export default ReviewsCreateUserPage;
