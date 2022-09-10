@@ -6,8 +6,7 @@ import { NotSignedIn } from '../../components/NotSignedInContent/NotSignedIn';
 import { Loading } from '../../components/Loading/Loading';
 import Image from 'next/image';
 import ButtonOne from '../../components/ButtonOne/ButtonOne';
-import { useState } from 'react';
-import { NewRecForm } from '../../components/NewRecForm/NewRecForm';
+import { NewRec } from '../../components/NewRec/NewRec';
 import { Recommendation } from '../../components/Recommendation/Recommendation';
 import CreateUser from '../../components/CreateUser/CreateUser';
 
@@ -15,7 +14,6 @@ const trpcOptions = {
 	refetchInterval: false,
 	refetchOnReconnect: false,
 	refetchOnWindowFocus: false,
-	refetchOnMount: false,
 };
 
 const RecsHomePage = ({}) => {
@@ -56,12 +54,6 @@ const Contents = ({ session }) => {
 			trpcOptions
 		);
 
-	//State for toggling the 'new recommendation' view
-	const [viewNewRec, setNewRec] = useState(false);
-	function toggleNewComment() {
-		setNewRec(!viewNewRec);
-	}
-
 	if (gettingUser) return <Loading />;
 	if (!recsUser)
 		return <CreateUser session={session} refetchUser={refetchUser} />;
@@ -96,15 +88,11 @@ const Contents = ({ session }) => {
 				</div>
 
 				<div className={styles.content}>
-					<div className={styles.button}>
-						<ButtonOne
-							text="Add rec"
-							onClick={toggleNewComment}
-							margin="1rem 0 2rem 0"
-							disabled={false}
-						/>
-					</div>
-					{viewNewRec && (
+					<NewRec
+						refetchRecs={refetchRecommendations}
+						authorId={session.user.id}
+					/>
+					{/* {viewNewRec && (
 						<div className={styles.recDiv}>
 							<NewRecForm
 								refetch={refetchRecommendations}
@@ -112,7 +100,7 @@ const Contents = ({ session }) => {
 								authorId={session.user.id}
 							/>
 						</div>
-					)}
+					)} */}
 
 					{recommendations ? (
 						recommendations.recs.map((rec) => (

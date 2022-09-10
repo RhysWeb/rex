@@ -10,10 +10,6 @@
 	background-color: #fff;
 }
 
-.button {
-	width: 95vw;
-}
-
 .content {
 	display: flex;
 	flex-direction: column;
@@ -51,10 +47,4 @@
 	justify-content: stretch;
 	align-items: center;
 	padding: 1rem;
-}
-
-.recDiv {
-	width: 100%;
-	display: grid;
-	place-items: center;
 }
