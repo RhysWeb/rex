@@ -1,4 +1,3 @@
-import type { NextPage } from 'next';
 import { useState } from 'react';
 import styles from './reviewsCreateUserPage.module.css';
 import Head from 'next/head';
@@ -7,10 +6,9 @@ import ButtonOne from '../../components/ButtonOne/ButtonOne';
 import ButtonTwo from '../../components/ButtonTwo/ButtonTwo';
 import { trpc } from '../../utils/trpc';
 
-// @ts-ignore
 const Contents = ({ session }) => {
 	const mutation = trpc.useMutation('reviewsUser.createUser');
-	const createAccount = (userName: string, id: string | null | undefined) => {
+	const createAccount = (userName, id) => {
 		if (typeof id !== 'string') return;
 		mutation.mutate({ authUserId: id, userName });
 	};
@@ -106,7 +104,7 @@ const Contents = ({ session }) => {
 	);
 };
 
-const ReviewsCreateUserPage: NextPage = () => {
+const ReviewsCreateUserPage = () => {
 	const { data: session, status } = useSession();
 	if (status === 'loading')
 		return (

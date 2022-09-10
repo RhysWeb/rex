@@ -22,8 +22,10 @@
 		"**/*.tsx",
 		"**/*.cjs",
 		"**/*.mjs",
-		"src/components/Loading/Loading.jsx",
-		"src/components/ButtonOne/ButtonOne.jsx"
+		"**/*.jsx"
+		// "src/components/Loading/Loading.jsx",
+		// "src/components/ButtonOne/ButtonOne.jsx",
+		// "src/components/ButtonTwo/ButtonTwo.jsx"
 	],
 	"exclude": ["node_modules"]
 }
