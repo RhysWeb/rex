@@ -62,7 +62,14 @@ const Contents = ({ session }) => {
 						</div>
 						<div className={styles.name}>{recsUser.userName}</div>
 					</div>
-					<button>sign out</button>
+					<ButtonOne
+						text="Sign out"
+						onClick={() => {
+							signOut();
+						}}
+						margin="3rem 0 0 0"
+						disabled={false}
+					/>
 				</div>
 
 				<div className={styles.content}>
@@ -71,6 +78,7 @@ const Contents = ({ session }) => {
 							text="Add rec"
 							onClick={toggleNewComment}
 							margin="1rem 0 2rem 0"
+							disabled={false}
 						/>
 					</div>
 					{viewNewRec && (
