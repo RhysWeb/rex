@@ -15,6 +15,7 @@ const trpcOptions = {
 	refetchInterval: false,
 	refetchOnReconnect: false,
 	refetchOnWindowFocus: false,
+	refetchOnMount: false,
 };
 
 const RecsHomePage = ({}) => {
