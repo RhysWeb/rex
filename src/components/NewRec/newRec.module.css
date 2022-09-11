@@ -1,7 +1,7 @@
 .content2 {
 	display: flex;
 	flex-direction: column;
-	justify-content: start;
+	justify-content: flex-start;
 	align-items: flex-start;
 }
 
@@ -28,7 +28,6 @@
 	resize: none;
 	height: auto;
 	font-weight: normal;
-
 	width: 100%;
 	color: black;
 	background-color: antiquewhite;
@@ -41,6 +40,7 @@
 
 @media (max-width: 600px) {
 	.card {
-		width: 100%;
+		width: 97vw;
+		border-radius: 0;
 	}
 }

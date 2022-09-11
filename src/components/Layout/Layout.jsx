@@ -19,6 +19,7 @@ export const Layout = (props) => {
 			<Head>
 				<meta name="robots" content="follow, index" />
 				<meta content={meta.description} name="description" />
+				<link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 				<link
 					rel="apple-touch-icon"
 					sizes="180x180"
@@ -36,7 +37,7 @@ export const Layout = (props) => {
 					sizes="16x16"
 					href="/favicon-16x16.png"
 				/>
-				<link rel="manifest" href="/site.webmanifest" />
+
 				<meta property="og:type" content={meta.type} />
 				<meta property="og:site_name" content="Chem Eng" />
 				<meta property="og:description" content={meta.description} />

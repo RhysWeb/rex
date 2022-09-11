@@ -104,7 +104,7 @@ const Contents = ({ session }) => {
 
 					{recommendations ? (
 						recommendations.recs.map((rec) => (
-							<div key={rec.id} className={styles.recDiv}>
+							<div key={rec.id}>
 								<Recommendation
 									name={rec.recName}
 									detail={rec.recDetail}

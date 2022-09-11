@@ -2,6 +2,15 @@
 @import 'open-props/normalize';
 @import 'open-props/buttons';
 
+body {
+	overflow-y: scroll;
+}
+
+@media (max-width: 600px) {
+	body {
+		overflow-x: hidden;
+	}
+}
 html {
 	/* light mode colours */
 	--brand-light: var(--orange-4);

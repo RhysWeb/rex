@@ -47,7 +47,7 @@ export const NewRec: React.FC<Props> = ({ refetchRecs, authorId }) => {
 	function toggleNewComment() {
 		setNewRec(!viewNewRec);
 	}
-	const { register, handleSubmit } = useForm<FormValues>();
+	const { register, handleSubmit, reset } = useForm<FormValues>();
 
 	const recMutation = trpc.useMutation(['recommendation.addRecommendation'], {
 		onSuccess: () => {
@@ -56,14 +56,15 @@ export const NewRec: React.FC<Props> = ({ refetchRecs, authorId }) => {
 			refetchRecs();
 		},
 	});
-	const onSubmit: SubmitHandler<FormValues> = async (data) => {
-		await recMutation.mutate({
+	const onSubmit: SubmitHandler<FormValues> = (data) => {
+		recMutation.mutate({
 			authorId: authorId,
 			recName: data.recName,
 			recDetail: data.recDetail,
 			rating: 5.6,
 			reviewCategory: data.reviewCategory,
 		});
+		reset();
 	};
 
 	return (
