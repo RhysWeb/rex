@@ -9,6 +9,8 @@ import ButtonOne from '../../components/ButtonOne/ButtonOne';
 import { NewRec } from '../../components/NewRec/NewRec';
 import { Recommendation } from '../../components/Recommendation/Recommendation';
 import CreateUser from '../../components/CreateUser/CreateUser';
+import Header from '../../components/Header/Header';
+import HeaderMenu from '../../components/HeaderMenu/HeaderMenu';
 
 const trpcOptions = {
 	refetchInterval: false,
@@ -60,47 +62,13 @@ const Contents = ({ session }) => {
 	if (recsUser)
 		return (
 			<div className={styles.main}>
-				<div className={styles.hero}>
-					<div className={styles.nameBadge}>
-						<div className={styles.imageContainer}>
-							<Image
-								src={session.user.image}
-								alt="user Image"
-								width={1000}
-								height={1000}
-								className={styles.icon}
-								placeholder="blur"
-								blurDataURL={session.user.image}
-							/>
-						</div>
-						<div className={styles.name}>{recsUser.userName}</div>
-					</div>
-					<div className={styles.logOutButtonContainer}>
-						<ButtonOne
-							text="Sign out"
-							onClick={() => {
-								signOut();
-							}}
-							margin="0 0 0 0"
-							disabled={false}
-						/>
-					</div>
-				</div>
-
+				<Header session={session} recsUser={recsUser} />
+				<HeaderMenu session={session} recsUser={recsUser} />
 				<div className={styles.content}>
 					<NewRec
 						refetchRecs={refetchRecommendations}
 						authorId={session.user.id}
 					/>
-					{/* {viewNewRec && (
-						<div className={styles.recDiv}>
-							<NewRecForm
-								refetch={refetchRecommendations}
-								setNewRec={setNewRec}
-								authorId={session.user.id}
-							/>
-						</div>
-					)} */}
 
 					{recommendations ? (
 						recommendations.recs.map((rec) => (

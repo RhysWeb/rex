@@ -1,0 +1,47 @@
+.hero {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: stretch;
+	background-color: var(--surface2);
+	z-index: 4;
+	border-bottom: var(--brand) 3px solid;
+}
+
+.nameBadge {
+	display: flex;
+	justify-content: stretch;
+	align-items: center;
+	padding: 1rem;
+	border-radius: 10px;
+}
+
+.imageContainer {
+	height: 4rem;
+	width: 4rem;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.name {
+	align-self: center;
+	justify-self: center;
+	font-family: var(--font-mono);
+	font-size: var(--font-size-6);
+	font-weight: var(--font-weight-5);
+	color: var(--text1);
+	margin-left: 1rem;
+}
+
+.logOutButtonContainer {
+	display: flex;
+	justify-content: stretch;
+	align-items: center;
+	padding: 1rem;
+}
+
+@media (max-width: 600px) {
+	.logOutButtonContainer {
+		display: none;
+	}
+}

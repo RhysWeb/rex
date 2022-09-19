@@ -2,55 +2,9 @@
 	width: 100%;
 }
 
-.hero {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: stretch;
-	background-color: #fff;
-}
-
 .content {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
-}
-
-.nameBadge {
-	display: flex;
-	justify-content: stretch;
-	align-items: center;
-	padding: 1rem;
-	border-radius: 10px;
-}
-
-.imageContainer {
-	height: 4rem;
-	width: 4rem;
-	border-radius: 50%;
-	overflow: hidden;
-}
-
-.name {
-	align-self: center;
-	justify-self: center;
-	font-family: var(--font-mono);
-	font-size: var(--font-size-6);
-	font-weight: var(--font-weight-5);
-	color: var(--text1);
-	margin-left: 1rem;
-}
-
-.logOutButtonContainer {
-	display: flex;
-	justify-content: stretch;
-	align-items: center;
-	padding: 1rem;
-}
-
-@media (max-width: 600px) {
-	.logOutButtonContainer {
-		display: none;
-	}
 }
