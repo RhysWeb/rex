@@ -42,3 +42,7 @@
 	z-index: -1;
 	box-shadow: var(--shadow-4);
 }
+
+.perspectiveTab:hover::after {
+	background: linear-gradient(hsl(50, 61%, 90%), hsl(50, 60%, 60%));
+}
