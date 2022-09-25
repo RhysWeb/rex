@@ -36,6 +36,20 @@ export const recRouter = createRouter()
 			return { success: true, review: reviewInDb };
 		},
 	})
+	.mutation('deleteRecommendation', {
+		input: z.object({
+			id: z.number(),
+		}),
+		async resolve({ input }) {
+			const { id } = input;
+			const deletedRec = await prisma.recommendation.delete({
+				where: {
+					id: id,
+				},
+			});
+			return { success: true, deletedRec: deletedRec };
+		},
+	})
 	.query('getRecommendations', {
 		input: z.object({
 			authorId: z.string(),

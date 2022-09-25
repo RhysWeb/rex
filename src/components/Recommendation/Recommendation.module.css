@@ -12,16 +12,11 @@
 	padding-top: var(--size-3);
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: center;
 }
 
 @media (max-width: 600px) {
-	.topRow {
-		flex-direction: column;
-		align-items: flex-start;
-	}
-
 	.card {
 		width: 97vw;
 		border-radius: 0;
@@ -33,12 +28,13 @@
 
 	font-size: var(--font-size-1);
 	display: inline;
+	margin-right: auto;
 }
-.date {
+.category {
 	color: var(--text2);
-
 	font-size: var(--font-size-1);
 	display: inline;
+	margin-right: 1rem;
 }
 
 .content {

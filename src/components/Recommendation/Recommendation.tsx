@@ -1,9 +1,13 @@
 import styles from './Recommendation.module.css';
+import { FaTrashAlt } from 'react-icons/fa';
+import { trpc } from '../../utils/trpc';
 
 interface Props {
 	name: string;
 	detail: string;
 	category: string;
+	id: number;
+	refetchRecs: () => void;
 }
 
 const icon = (type: string): string => {
@@ -47,12 +51,35 @@ const icon = (type: string): string => {
 	return icon;
 };
 
-export const Recommendation: React.FC<Props> = ({ name, detail, category }) => {
+export const Recommendation: React.FC<Props> = ({
+	name,
+	detail,
+	category,
+	id,
+	refetchRecs,
+}) => {
+	const delRecMutation = trpc.useMutation(
+		['recommendation.deleteRecommendation'],
+		{
+			onSuccess: () => {
+				console.log('deleted');
+				refetchRecs();
+			},
+		}
+	);
+
 	return (
 		<div className={styles.card}>
 			<div className={styles.topRow}>
 				<p className={styles.name}>{`${icon(category)} ${name}`}</p>
-				<p className={styles.date}>{category}</p>
+				<p className={styles.category}>{category}</p>
+				<button
+					onClick={() => {
+						delRecMutation.mutate({ id: id });
+					}}
+				>
+					<FaTrashAlt />
+				</button>
 			</div>
 			<div className={styles.content}>{detail}</div>
 		</div>

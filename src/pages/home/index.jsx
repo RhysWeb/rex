@@ -77,6 +77,8 @@ const Contents = ({ session }) => {
 									name={rec.recName}
 									detail={rec.recDetail}
 									category={rec.reviewCategory}
+									id={rec.id}
+									refetchRecs={refetchRecommendations}
 								/>
 							</div>
 						))
