@@ -3,7 +3,7 @@ import ButtonOne from '../ButtonOne/ButtonOne';
 import styles from './HeaderMenu.module.css';
 import { signOut } from 'next-auth/react';
 
-const HeaderMenu = ({ session, recsUser }) => {
+const HeaderMenu = ({ session }) => {
 	return (
 		<div className={styles.container}>
 			<div className={styles.perspectiveTab}>Recommendations</div>

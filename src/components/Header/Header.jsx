@@ -3,7 +3,7 @@ import ButtonOne from '../ButtonOne/ButtonOne';
 import styles from './Header.module.css';
 import { signOut } from 'next-auth/react';
 
-const Header = ({ session, recsUser }) => {
+const Header = ({ session }) => {
 	return (
 		<div className={styles.hero}>
 			<div className={styles.nameBadge}>
@@ -17,7 +17,7 @@ const Header = ({ session, recsUser }) => {
 						blurDataURL={session.user.image}
 					/>
 				</div>
-				<div className={styles.name}>{recsUser.userName}</div>
+				<div className={styles.name}>{session.user.name}</div>
 			</div>
 			<div className={styles.logOutButtonContainer}>
 				<ButtonOne
