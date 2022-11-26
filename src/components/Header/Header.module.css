@@ -40,8 +40,8 @@
 	padding: 1rem;
 }
 
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
 	.logOutButtonContainer {
 		display: none;
 	}
-}
+} */

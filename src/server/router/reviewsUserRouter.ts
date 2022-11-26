@@ -24,4 +24,13 @@ export const reviewsUserRouter = createRouter()
 			const users = await prisma.user.findMany({ where: { role: 'USER' } });
 			return users;
 		},
+	})
+	.query('getUser', {
+		input: z.object({
+			id: z.string(),
+		}),
+		async resolve({ input }) {
+			const friend = await prisma.user.findFirst({ where: { id: input.id } });
+			return friend;
+		},
 	});

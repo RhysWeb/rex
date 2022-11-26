@@ -26,15 +26,6 @@ const HeaderMenu = ({ selected }) => {
 					Friends
 				</div>
 			</Link>
-			<div
-				className={
-					selected == 'other'
-						? `${styles.perspectiveTab} ${styles.selected}`
-						: styles.perspectiveTab
-				}
-			>
-				Other
-			</div>
 		</div>
 	);
 };

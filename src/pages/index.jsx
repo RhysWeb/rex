@@ -1,8 +1,8 @@
 import styles from './recsHomePage.module.css';
 import { trpc } from '../utils/trpc';
-import { Loading } from '../components/Loading/Loading';
 import { NewRec } from '../components/NewRec/NewRec';
 import { Recommendation } from '../components/Recommendation/Recommendation';
+import { Loading } from '../components/Loading/Loading';
 import Header from '../components/Header/Header';
 import HeaderMenu from '../components/HeaderMenu/HeaderMenu';
 import { unstable_getServerSession } from 'next-auth';
@@ -71,6 +71,7 @@ export default function RecsHomePage({ data: session }) {
 								category={rec.reviewCategory}
 								id={rec.id}
 								refetchRecs={refetchRecommendations}
+								del={true}
 							/>
 						</div>
 					))

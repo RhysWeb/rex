@@ -7,6 +7,7 @@ interface Props {
 	detail: string;
 	category: string;
 	id: number;
+	del: boolean;
 	refetchRecs: () => void;
 }
 
@@ -56,6 +57,7 @@ export const Recommendation: React.FC<Props> = ({
 	detail,
 	category,
 	id,
+	del,
 	refetchRecs,
 }) => {
 	const delRecMutation = trpc.useMutation(['recs.deleteRecommendation'], {
@@ -70,13 +72,15 @@ export const Recommendation: React.FC<Props> = ({
 			<div className={styles.topRow}>
 				<p className={styles.name}>{`${icon(category)} ${name}`}</p>
 				<p className={styles.category}>{category}</p>
-				<button
-					onClick={() => {
-						delRecMutation.mutate({ id: id });
-					}}
-				>
-					<FaTrashAlt />
-				</button>
+				{del && (
+					<button
+						onClick={() => {
+							delRecMutation.mutate({ id: id });
+						}}
+					>
+						<FaTrashAlt />
+					</button>
+				)}
 			</div>
 			<div className={styles.content}>{detail}</div>
 		</div>

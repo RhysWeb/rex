@@ -8,6 +8,7 @@ import HeaderMenu from '../../components/HeaderMenu/HeaderMenu';
 import { unstable_getServerSession } from 'next-auth';
 import { authOptions } from '../api/auth/[...nextauth]';
 import { useForm } from 'react-hook-form';
+import Link from 'next/link';
 
 const trpcOptions = {
 	refetchInterval: false,
@@ -102,7 +103,7 @@ export default function RecsFriendsPage({ data: session }) {
 						if (user.id !== session.user.id) {
 							return (
 								<option key={user.id} value={user.id}>
-									{user.name}
+									{`${user.name}🔸(${user.email})`}
 								</option>
 							);
 						}
@@ -116,7 +117,9 @@ export default function RecsFriendsPage({ data: session }) {
 					friendsData.friends.friends?.map((friend) => {
 						return (
 							<div key={friend.id} className={styles.friend}>
-								<p className={styles.friendName}>{friend.name}</p>
+								<Link href={`/friends/${friend.id}`}>
+									<a className={styles.friendName}>{friend.name}</a>
+								</Link>
 								<button
 									className={styles.friendRemoveButton}
 									onClick={() => {
