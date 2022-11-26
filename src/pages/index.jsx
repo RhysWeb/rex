@@ -48,14 +48,14 @@ export default function RecsHomePage({ data: session }) {
 	console.log('calling trpc getRecommendations');
 	const { data: recommendations, refetch: refetchRecommendations } =
 		trpc.useQuery(
-			['recommendation.getRecommendations', { authorId: session.user.id }],
+			['recs.getRecommendations', { authorId: session.user.id }],
 			trpcOptions
 		);
 
 	return (
 		<div className={styles.main}>
 			<Header session={session} />
-			<HeaderMenu session={session} />
+			<HeaderMenu selected="recommendations" />
 			<div className={styles.content}>
 				<NewRec
 					refetchRecs={refetchRecommendations}

@@ -63,4 +63,98 @@ export const recRouter = createRouter()
 			});
 			return { success: true, recs };
 		},
+	})
+	.mutation('addFriend', {
+		input: z.object({
+			id: z.string(),
+			friendId: z.string(),
+		}),
+		async resolve({ input }) {
+			//use prisma to add a friend to the user
+			const { id, friendId } = input;
+			const friend = await prisma.user.update({
+				where: {
+					id: id,
+				},
+				data: {
+					friends: {
+						connect: {
+							id: friendId,
+						},
+					},
+				},
+			});
+			return { success: true, friend };
+		},
+	})
+	.mutation('delFriend', {
+		input: z.object({
+			id: z.string(),
+			friendId: z.string(),
+		}),
+		async resolve({ input }) {
+			//use prisma to delete a friend from the user
+			const { id, friendId } = input;
+			const friend = await prisma.user.update({
+				where: {
+					id: id,
+				},
+				data: {
+					friends: {
+						disconnect: {
+							id: friendId,
+						},
+					},
+				},
+			});
+			return { success: true, friend };
+		},
+	})
+	.query('getFriends', {
+		input: z.object({
+			id: z.string(),
+		}),
+		async resolve({ input }) {
+			const { id } = input;
+			const friends = await prisma.user.findUnique({
+				where: {
+					id: id,
+				},
+				select: {
+					friends: true,
+				},
+			});
+			return { success: true, friends };
+		},
 	});
+
+// 	},
+// })
+// .mutation('deleteFriend', {
+// 	input: z.object({
+// 		id: z.number(),
+// 	}),
+// 	async resolve({ input }) {
+// 		const { id } = input;
+// 		const deletedRec = await prisma.recommendation.delete({
+// 			where: {
+// 				id: id,
+// 			},
+// 		});
+// 		return { success: true, deletedRec: deletedRec };
+// 	},
+// })
+// .query('getFriends', {
+// 	input: z.object({
+// 		authorId: z.string(),
+// 	}),
+// 	async resolve({ input }) {
+// 		const { authorId } = input;
+// 		const recs = await prisma.recommendation.findMany({
+// 			where: {
+// 				authorId,
+// 			},
+// 		});
+// 		return { success: true, recs };
+// 	},
+// })

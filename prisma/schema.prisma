@@ -53,6 +53,8 @@ model User {
   accounts      Account[]
   sessions      Session[]
   recommendations Recommendation[]
+  friends         User[] @relation("friends")
+  friendsRelation User[] @relation("friends")
 }
 
 model VerificationToken {
@@ -67,7 +69,7 @@ model VerificationToken {
 
 model Recommendation {
   id             Int            @id @default(autoincrement())
-  author         User    @relation(fields: [authorId], references: [id])
+  author         User           @relation(fields: [authorId], references: [id])
   authorId       String
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt

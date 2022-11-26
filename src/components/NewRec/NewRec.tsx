@@ -49,7 +49,7 @@ export const NewRec: React.FC<Props> = ({ refetchRecs, authorId }) => {
 	}
 	const { register, handleSubmit, reset } = useForm<FormValues>();
 
-	const recMutation = trpc.useMutation(['recommendation.addRecommendation'], {
+	const recMutation = trpc.useMutation(['recs.addRecommendation'], {
 		onSuccess: () => {
 			console.log('success');
 			setNewRec(false);

@@ -8,7 +8,7 @@ import { recRouter } from './recRouter';
 export const appRouter = createRouter()
 	.transformer(superjson)
 	.merge('reviewsUser.', reviewsUserRouter)
-	.merge('recommendation.', recRouter);
+	.merge('recs.', recRouter);
 
 // export type definition of API
 export type AppRouter = typeof appRouter;

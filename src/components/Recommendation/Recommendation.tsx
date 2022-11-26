@@ -58,15 +58,12 @@ export const Recommendation: React.FC<Props> = ({
 	id,
 	refetchRecs,
 }) => {
-	const delRecMutation = trpc.useMutation(
-		['recommendation.deleteRecommendation'],
-		{
-			onSuccess: () => {
-				console.log('deleted');
-				refetchRecs();
-			},
-		}
-	);
+	const delRecMutation = trpc.useMutation(['recs.deleteRecommendation'], {
+		onSuccess: () => {
+			console.log('deleted');
+			refetchRecs();
+		},
+	});
 
 	return (
 		<div className={styles.card}>

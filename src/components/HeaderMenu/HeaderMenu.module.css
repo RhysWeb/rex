@@ -46,3 +46,7 @@
 .perspectiveTab:hover::after {
 	background: linear-gradient(hsl(50, 61%, 90%), hsl(50, 60%, 60%));
 }
+
+.selected::after {
+	background: linear-gradient(hsl(50, 61%, 90%), hsl(50, 60%, 60%));
+}

@@ -1,14 +1,40 @@
-import Image from 'next/image';
-import ButtonOne from '../ButtonOne/ButtonOne';
 import styles from './HeaderMenu.module.css';
-import { signOut } from 'next-auth/react';
+import Link from 'next/link';
 
-const HeaderMenu = ({ session }) => {
+const HeaderMenu = ({ selected }) => {
 	return (
 		<div className={styles.container}>
-			<div className={styles.perspectiveTab}>Recommendations</div>
-			<div className={styles.perspectiveTab}>Friends</div>
-			<div className={styles.perspectiveTab}>Other</div>
+			<Link href="/">
+				<div
+					className={
+						selected == 'recommendations'
+							? `${styles.perspectiveTab} ${styles.selected}`
+							: styles.perspectiveTab
+					}
+				>
+					Recommendations
+				</div>
+			</Link>
+			<Link href="/friends">
+				<div
+					className={
+						selected == 'friends'
+							? `${styles.perspectiveTab} ${styles.selected}`
+							: styles.perspectiveTab
+					}
+				>
+					Friends
+				</div>
+			</Link>
+			<div
+				className={
+					selected == 'other'
+						? `${styles.perspectiveTab} ${styles.selected}`
+						: styles.perspectiveTab
+				}
+			>
+				Other
+			</div>
 		</div>
 	);
 };
