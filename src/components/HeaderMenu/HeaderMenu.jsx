@@ -4,7 +4,7 @@ import Link from 'next/link';
 const HeaderMenu = ({ selected }) => {
 	return (
 		<div className={styles.container}>
-			<Link href="/">
+			<Link href="/home">
 				<div
 					className={
 						selected == 'recommendations'

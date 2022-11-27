@@ -7,6 +7,7 @@ import Header from '../../components/Header/Header';
 import HeaderMenu from '../../components/HeaderMenu/HeaderMenu';
 import { unstable_getServerSession } from 'next-auth';
 import { authOptions } from '../api/auth/[...nextauth]';
+import { signIn } from 'next-auth/react';
 
 const trpcOptions = {
 	refetchInterval: false,
@@ -23,6 +24,8 @@ export async function getServerSideProps(context) {
 
 	if (!session) {
 		console.log('no session');
+		signIn('google', { callbackUrl: '/home' });
+
 		return {
 			redirect: {
 				destination: '/',

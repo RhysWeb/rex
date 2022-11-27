@@ -1,8 +1,13 @@
 import styles from './index.module.css';
 import Image from 'next/image';
 import { signIn } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 export default function NotSignedIn() {
+	const { data: session } = useSession();
+	const router = useRouter();
+
 	return (
 		<div className={styles.main}>
 			<Image
@@ -28,8 +33,12 @@ export default function NotSignedIn() {
 
 			<button
 				onClick={() => {
-					signIn('google', { callbackUrl: '/home' });
-					console.log('fired');
+					if (session) {
+						router.push('/home');
+					} else {
+						signIn('google', { callbackUrl: '/home' });
+						console.log('fired');
+					}
 				}}
 				className={styles.newButton}
 			>
