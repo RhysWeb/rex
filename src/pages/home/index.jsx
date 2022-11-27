@@ -59,6 +59,7 @@ export default function RecsHomePage({ data: session }) {
 		<div className={styles.main}>
 			<Header session={session} />
 			<HeaderMenu selected="recommendations" />
+
 			<div className={styles.content}>
 				<NewRec
 					refetchRecs={refetchRecommendations}

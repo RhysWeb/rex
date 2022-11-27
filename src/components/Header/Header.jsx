@@ -17,17 +17,22 @@ const Header = ({ session }) => {
 						blurDataURL={session.user.image}
 					/>
 				</div>
-				<div className={styles.name}>{session.user.name}</div>
+				<div className={styles.flex}>
+					<div className={styles.name}>{session.user.name}</div>
+
+					<input
+						type="button"
+						value="sign-out"
+						onClick={() => {
+							signOut();
+						}}
+						className={styles.signOutButton}
+					/>
+				</div>
 			</div>
 			<div className={styles.logOutButtonContainer}>
-				<ButtonOne
-					text="Sign out"
-					onClick={() => {
-						signOut();
-					}}
-					margin="0 0 0 0"
-					disabled={false}
-				/>
+				<div className={styles.circle}></div>
+				<h1 className={styles.title}>Recs</h1>
 			</div>
 		</div>
 	);
