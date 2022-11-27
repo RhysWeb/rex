@@ -1,11 +1,7 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import styles from './Layout.module.css';
-import Link from 'next/link';
 
 export const Layout = (props) => {
-	const router = useRouter();
-
 	const { children, ...customMeta } = props;
 	const meta = {
 		title: 'Recs',

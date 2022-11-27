@@ -1,84 +1,42 @@
-import styles from './recsHomePage.module.css';
-import { trpc } from '../utils/trpc';
-import { NewRec } from '../components/NewRec/NewRec';
-import { Recommendation } from '../components/Recommendation/Recommendation';
-import { Loading } from '../components/Loading/Loading';
-import Header from '../components/Header/Header';
-import HeaderMenu from '../components/HeaderMenu/HeaderMenu';
-import { unstable_getServerSession } from 'next-auth';
-import { authOptions } from './api/auth/[...nextauth]';
+import styles from './index.module.css';
+import Image from 'next/image';
+import { signIn } from 'next-auth/react';
 
-const trpcOptions = {
-	refetchInterval: false,
-	refetchOnReconnect: false,
-	refetchOnWindowFocus: false,
-};
-
-export async function getServerSideProps(context) {
-	const session = await unstable_getServerSession(
-		context.req,
-		context.res,
-		authOptions
-	);
-
-	if (!session) {
-		console.log('no session');
-		return {
-			redirect: {
-				destination: '/login',
-				permanent: false,
-			},
-		};
-	} else if (!session.user?.role) {
-		console.log('Session but no user role');
-		return {
-			redirect: {
-				destination: '/signup',
-				permanent: false,
-			},
-		};
-	} else {
-		console.log('success');
-		return { props: { data: session } };
-	}
-}
-
-export default function RecsHomePage({ data: session }) {
-	// Get the users recommendations
-	console.log('calling trpc getRecommendations');
-	const { data: recommendations, refetch: refetchRecommendations } =
-		trpc.useQuery(
-			['recs.getRecommendations', { authorId: session.user.id }],
-			trpcOptions
-		);
-
+export default function NotSignedIn() {
 	return (
 		<div className={styles.main}>
-			<Header session={session} />
-			<HeaderMenu selected="recommendations" />
-			<div className={styles.content}>
-				<NewRec
-					refetchRecs={refetchRecommendations}
-					authorId={session.user.id}
-				/>
-
-				{recommendations ? (
-					recommendations.recs.map((rec) => (
-						<div key={rec.id}>
-							<Recommendation
-								name={rec.recName}
-								detail={rec.recDetail}
-								category={rec.reviewCategory}
-								id={rec.id}
-								refetchRecs={refetchRecommendations}
-								del={true}
-							/>
-						</div>
-					))
-				) : (
-					<Loading />
-				)}
+			<Image
+				className={styles.image}
+				// src="https://res.cloudinary.com/dffmzkbrq/image/upload/v1661123619/friends4_s7qcaz.jpg"
+				src="/friends4.jpg"
+				alt="A group of young white friends laughing and looking pleased with themselves"
+				layout="fill"
+				objectFit="cover"
+				objectPosition="center"
+				priority
+				placeholder="blur"
+				blurDataURL="/friends4.jpg"
+			/>
+			<div className={styles.titleContainer}>
+				<div className={styles.circle}></div>
+				<h1 className={styles.title}>Recs</h1>
 			</div>
+			<h2 className={styles.subHeading}>
+				A site for friends to give and receive recommendations
+			</h2>
+			<p className={styles.note}>...and rate each other on their choices</p>
+
+			<button
+				onClick={() => {
+					signIn('google', { callbackUrl: '/home' });
+					console.log('fired');
+				}}
+				className={styles.newButton}
+			>
+				Sign in with Google
+			</button>
+
+			<p className={styles.itsFree}>It&apos;s free</p>
 		</div>
 	);
 }

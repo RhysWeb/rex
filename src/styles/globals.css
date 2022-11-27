@@ -13,7 +13,7 @@ body {
 }
 html {
 	/* light mode colours */
-	--brand-light: var(--orange-4);
+	--brand-light: var(--orange-5);
 	--brand2-light: var(--orange-2);
 	--brandSecondary-light: var(--blue-3);
 	--text1-light: var(--gray-8);

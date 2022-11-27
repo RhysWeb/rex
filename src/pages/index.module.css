@@ -1,0 +1,126 @@
+.main {
+	/* margin-top: 100px; */
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	width: 100%;
+	margin-top: 2rem;
+}
+
+.titleContainer {
+	position: relative;
+	height: 100px;
+	width: 100%;
+	margin-inline: auto;
+}
+
+.title {
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+
+	position: absolute;
+	margin-block: 2rem;
+	font-size: var(--font-size-8);
+	text-align: center;
+	color: var(--brand);
+	text-shadow: white 0.1em 0.1em 0.2em;
+	z-index: 10;
+}
+
+.circle {
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	transform: translateY(25%);
+	width: 100px;
+	height: 100px;
+	border: 15px solid;
+	border-color: var(--brand) white;
+	border-radius: 50%;
+	background: transparent;
+	opacity: 0.6;
+	z-index: 8;
+	box-shadow: var(--shadow-6);
+}
+
+.subHeading {
+	text-align: center;
+	width: clamp(300px, 50%, 800px);
+	min-width: 80vwpx;
+	font-size: var(--font-size-3);
+	margin-top: var(--size-fluid-3);
+	padding-top: var(--size-fluid-3);
+	z-index: 1;
+
+	margin-inline: 1rem;
+}
+
+.note {
+	background-color: hsl(0, 0%, 90%, 0.3);
+	border-radius: 10px;
+	padding: 0.1rem 0.7rem;
+	font-weight: var(--font-weight-5);
+	margin-top: 1rem;
+	z-index: 1;
+	font-size: var(--font-size-1);
+}
+
+.itsFree {
+	background-color: hsl(0, 0%, 90%, 0.2);
+	border-radius: 10px;
+	padding: 0.1rem 0.7rem;
+	margin-top: var(--size-fluid-1);
+	z-index: 1;
+	font-weight: var(--font-weight-5);
+}
+
+.image {
+	opacity: 0.4;
+	z-index: -1;
+}
+
+.buttonDiv {
+	z-index: 1000;
+	isolation: isolate;
+}
+
+.navBar {
+	transform: translateY(-60px);
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	z-index: 1;
+}
+
+.navIcon {
+	stroke: var(--text1);
+	fill: var(--brand2);
+	cursor: pointer;
+	z-index: 10;
+}
+
+.newButton {
+	z-index: 10;
+	margin-top: 3rem;
+	display: inline-flex;
+	white-space: nowrap;
+	font-size: var(--font-size-1);
+	font-weight: var(--font-weight-7);
+	padding-inline: var(--size-6);
+	padding-block: var(--size-3);
+	color: white;
+	border: var(--border-size-2) solid white;
+	background-color: var(--brand);
+	border-radius: var(--radius-2);
+}
+
+.newButton:hover {
+	color: white;
+	border: var(--border-size-2) solid white;
+	background-color: var(--orange-2);
+}
