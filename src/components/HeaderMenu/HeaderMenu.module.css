@@ -27,6 +27,7 @@
 	cursor: pointer;
 	perspective: 200px;
 	translate: 5px 0.3rem;
+	font-weight: bold;
 }
 
 .perspectiveTab:hover {
@@ -44,9 +45,13 @@
 }
 
 .perspectiveTab:hover::after {
-	background: linear-gradient(hsl(50, 61%, 90%), hsl(50, 60%, 60%));
+	background: linear-gradient(hsl(31, 59%, 83%), hsl(40, 69%, 53%));
 }
 
 .selected::after {
-	background: linear-gradient(hsl(50, 61%, 90%), hsl(50, 60%, 60%));
+	background: linear-gradient(hsl(31, 59%, 83%), hsl(40, 69%, 53%));
+}
+
+.selected {
+	font-weight: bold;
 }
