@@ -22,10 +22,9 @@ export default function NotSignedIn() {
 				placeholder="blur"
 				blurDataURL="/friends4.jpg"
 			/>
-			<div className={styles.titleContainer}>
-				<div className={styles.circle}></div>
-				<h1 className={styles.title}>Recs</h1>
-			</div>
+
+			<h1 className={styles.title}>Recs</h1>
+
 			<h2 className={styles.subHeading}>
 				A site for friends to give and receive recommendations
 			</h2>
@@ -45,7 +44,7 @@ export default function NotSignedIn() {
 				Sign in with Google
 			</button>
 
-			<p className={styles.itsFree}>It&apos;s free</p>
+			<p className={styles.note}>It&apos;s free</p>
 		</div>
 	);
 }
