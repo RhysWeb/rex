@@ -10,3 +10,5 @@
 8. Make the header sticky
 9. Make it so that when you click on the name or icon it brings up a sign out option
 10. Simplify everything so that its more readable (why, not what) - Make the header smaller. Remove the tabs.
+11. Make the logo sizes relative to a css variable so that i can scale it easily.
+12. Change the favicon so that it is on brand

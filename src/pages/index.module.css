@@ -27,6 +27,7 @@
 	text-shadow: var(--surface-1) 0.1em 0.1em 0.3em;
 	z-index: 10;
 	margin-top: var(--size-fluid-5);
+	font-family: var(--font-sans);
 }
 
 .title::before {
