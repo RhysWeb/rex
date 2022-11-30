@@ -2,6 +2,9 @@ import Image from 'next/image';
 import ButtonOne from '../ButtonOne/ButtonOne';
 import styles from './Header.module.css';
 import { signOut } from 'next-auth/react';
+import { Sansita_Swashed } from '@next/font/google';
+
+const sansita = Sansita_Swashed({ subsets: ['latin'] });
 
 const Header = ({ session }) => {
 	return (
@@ -30,9 +33,8 @@ const Header = ({ session }) => {
 					/>
 				</div>
 			</div>
-			<div className={styles.logOutButtonContainer}>
-				<div className={styles.circle}></div>
-				<h1 className={styles.title}>Recs</h1>
+			<div className={styles.titleContainer}>
+				<h1 className={`${styles.title} ${sansita.className}`}>Recs</h1>
 			</div>
 		</div>
 	);
