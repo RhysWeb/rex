@@ -4,6 +4,10 @@ import { signIn } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
+import { Sansita_Swashed } from '@next/font/google';
+
+const sansita = Sansita_Swashed({ subsets: ['latin'] });
+
 export default function NotSignedIn() {
 	const { data: session } = useSession();
 	const router = useRouter();
@@ -22,8 +26,9 @@ export default function NotSignedIn() {
 				placeholder="blur"
 				blurDataURL="/friends4.jpg"
 			/>
-
-			<h1 className={styles.title}>Recs</h1>
+			<div className={styles.titleParent}>
+				<h1 className={`${styles.title} ${sansita.className}`}>Recs</h1>
+			</div>
 
 			<h2 className={styles.subHeading}>
 				A site for friends to give and receive recommendations

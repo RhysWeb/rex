@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import styles from './Layout.module.css';
+import { Sansita_Swashed } from '@next/font/google';
 
+const sansita = Sansita_Swashed({ subsets: ['latin'] });
 export const Layout = (props) => {
 	const { children, ...customMeta } = props;
 	const meta = {
@@ -47,7 +49,7 @@ export const Layout = (props) => {
 				<meta name="twitter:image" content={meta.image} />
 			</Head>
 
-			<main className={styles.layoutContainer}>{children}</main>
+			<main>{children}</main>
 		</>
 	);
 };
