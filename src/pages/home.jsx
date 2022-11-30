@@ -1,12 +1,12 @@
 import styles from './recsHomePage.module.css';
-import { trpc } from '../../utils/trpc';
-import { NewRec } from '../../components/NewRec/NewRec';
-import { Recommendation } from '../../components/Recommendation/Recommendation';
-import { Loading } from '../../components/Loading/Loading';
-import Header from '../../components/Header/Header';
-import HeaderMenu from '../../components/HeaderMenu/HeaderMenu';
+import { trpc } from '../utils/trpc';
+import { NewRec } from '../components/NewRec/NewRec';
+import { Recommendation } from '../components/Recommendation/Recommendation';
+import { Loading } from '../components/Loading/Loading';
+import Header from '../components/Header/Header';
+import HeaderMenu from '../components/HeaderMenu/HeaderMenu';
 import { unstable_getServerSession } from 'next-auth';
-import { authOptions } from '../api/auth/[...nextauth]';
+import { authOptions } from './api/auth/[...nextauth]';
 import { signIn } from 'next-auth/react';
 
 const trpcOptions = {

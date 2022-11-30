@@ -117,8 +117,11 @@ export default function RecsFriendsPage({ data: session }) {
 					friendsData.friends.friends?.map((friend) => {
 						return (
 							<div key={friend.id} className={styles.friend}>
-								<Link href={`/friends/${friend.id}`}>
-									<a className={styles.friendName}>{friend.name}</a>
+								<Link
+									className={styles.friendName}
+									href={`/friends/${friend.id}`}
+								>
+									{friend.name}
 								</Link>
 								<button
 									className={styles.friendRemoveButton}

@@ -11,6 +11,7 @@ import { Layout } from '../components/Layout/Layout';
 
 const MyApp: AppType = ({
 	Component,
+	// @ts-ignore
 	pageProps: { session, ...pageProps },
 }) => {
 	return (
