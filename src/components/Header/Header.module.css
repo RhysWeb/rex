@@ -51,6 +51,14 @@
 	margin: 1rem;
 }
 
+.flip {
+	transform: rotate(-180deg);
+	font-size: 12px;
+	display: grid;
+	place-content: center;
+	margin: 1rem;
+}
+
 .title {
 	left: 0;
 	right: 0;

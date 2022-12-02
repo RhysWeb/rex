@@ -6,7 +6,7 @@ import { Sansita_Swashed } from '@next/font/google';
 
 const sansita = Sansita_Swashed({ subsets: ['latin'] });
 
-const Header = ({ session }) => {
+const Header = ({ session, flip }) => {
 	return (
 		<div className={styles.hero}>
 			<div className={styles.nameBadge}>
@@ -33,7 +33,7 @@ const Header = ({ session }) => {
 					/>
 				</div>
 			</div>
-			<div className={styles.titleContainer}>
+			<div className={!flip ? styles.titleContainer : styles.flip}>
 				<h1 className={`${styles.title} ${sansita.className}`}>Recs</h1>
 			</div>
 		</div>
