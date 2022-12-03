@@ -1,13 +1,13 @@
 import styles from './recsHomePage.module.css';
 import { trpc } from '../utils/trpc';
-import { NewRec } from '../components/NewRec/NewRec';
-import { Recommendation } from '../components/Recommendation/Recommendation';
-import { Loading } from '../components/Loading/Loading';
-import Header from '../components/Header/Header';
-import HeaderMenu from '../components/HeaderMenu/HeaderMenu';
 import { unstable_getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]';
 import { signIn } from 'next-auth/react';
+import { useState } from 'react';
+import Recommendations from '../components/Recomendations/Recommendations';
+import Hell from '../components/Hell/Hell';
+import Header from '../components/Header/Header';
+import HeaderMenuTwo from '../components/HeaderMenuTwo/HeaderMenuTwo';
 
 const trpcOptions = {
 	refetchInterval: false,
@@ -46,8 +46,12 @@ export async function getServerSideProps(context) {
 	}
 }
 
-export default function RecsHomePage({ data: session }) {
-	// Get the users recommendations
+export default function RecsHelloPage({ data: session }) {
+	const [flip, setFlip] = useState(false);
+	const toggleFlip = () => {
+		setFlip(!flip);
+	};
+
 	console.log('calling trpc getRecommendations');
 	const { data: recommendations, refetch: refetchRecommendations } =
 		trpc.useQuery(
@@ -56,32 +60,28 @@ export default function RecsHomePage({ data: session }) {
 		);
 
 	return (
-		<div className={styles.main}>
-			<Header session={session} />
-			<HeaderMenu selected="recommendations" />
+		<div className={styles.flipContainer}>
+			<Header session={session} flip={flip} toggleFlip={toggleFlip} />
+			<HeaderMenuTwo selected="recommendations" flip={flip} />
+			{/* <button onClick={toggleFlip}>Upside-Down</button> */}
+			<div
+				className={`${styles.cardFlipper} ${flip ? styles.performFlip : ''}`}
+			>
+				<div className={styles.cardFrontFace}>
+					<Recommendations
+						recs={recommendations}
+						refetch={refetchRecommendations}
+						session={session}
+					/>
+				</div>
 
-			<div className={styles.content}>
-				<NewRec
-					refetchRecs={refetchRecommendations}
-					authorId={session.user.id}
-				/>
-
-				{recommendations ? (
-					recommendations.recs.map((rec) => (
-						<div key={rec.id}>
-							<Recommendation
-								name={rec.recName}
-								detail={rec.recDetail}
-								category={rec.reviewCategory}
-								id={rec.id}
-								refetchRecs={refetchRecommendations}
-								del={true}
-							/>
-						</div>
-					))
-				) : (
-					<Loading />
-				)}
+				<div className={styles.cardBackFace}>
+					<Hell
+						recs={recommendations}
+						refetch={refetchRecommendations}
+						session={session}
+					/>
+				</div>
 			</div>
 		</div>
 	);

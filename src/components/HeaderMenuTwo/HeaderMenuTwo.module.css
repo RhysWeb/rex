@@ -1,0 +1,45 @@
+.container {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: stretch;
+	gap: 0.5rem;
+	height: 1rem;
+	width: 100vw;
+	position: relative;
+	transition: transform 2s;
+}
+
+.clippedTab {
+	background-color: var(--surface2);
+	position: relative;
+	padding-inline: 1.5rem;
+	padding-block: 0.5rem;
+	box-shadow: var(--shadow-4);
+	clip-path: polygon(0% 0%, 100% 0%, 90% 200%, 10% 200%);
+	cursor: pointer;
+	border-top: var(--brand2) solid 1px;
+}
+
+.selected::after {
+	background: linear-gradient(hsl(31, 59%, 83%), hsl(40, 69%, 53%));
+}
+
+.selected {
+	font-weight: bold;
+}
+
+.menuTab {
+	color: inherit;
+}
+
+.hidden {
+	position: absolute;
+	transform: translateX(-500px);
+	transition: transform 2s;
+}
+.unhidden {
+	position: absolute;
+	transform: translateX(0px);
+	transition: transform 2s;
+}
