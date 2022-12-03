@@ -8,6 +8,7 @@ import superjson from 'superjson';
 import type { AppRouter } from '../server/router';
 import '../styles/globals.css';
 import { Layout } from '../components/Layout/Layout';
+import { DataProvider } from '../utils/DataContext';
 
 const MyApp: AppType = ({
 	Component,
@@ -16,9 +17,11 @@ const MyApp: AppType = ({
 }) => {
 	return (
 		<SessionProvider session={session}>
-			<Layout>
-				<Component {...pageProps} />
-			</Layout>
+			<DataProvider>
+				<Layout>
+					<Component {...pageProps} />
+				</Layout>
+			</DataProvider>
 		</SessionProvider>
 	);
 };

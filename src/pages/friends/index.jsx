@@ -4,11 +4,14 @@ import { Loading } from '../../components/Loading/Loading';
 import { NewRec } from '../../components/NewRec/NewRec';
 import { Recommendation } from '../../components/Recommendation/Recommendation';
 import Header from '../../components/Header/Header';
-import HeaderMenu from '../../components/HeaderMenu/HeaderMenu';
+import HeaderMenuTwo from '../../components/HeaderMenuTwo/HeaderMenuTwo';
 import { unstable_getServerSession } from 'next-auth';
 import { authOptions } from '../api/auth/[...nextauth]';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
+import { useData } from '../../utils/DataContext';
+import Friends from '../../components/Friends/Friends';
+import Enemies from '../../components/Enemies/Enemies';
 
 const trpcOptions = {
 	refetchInterval: false,
@@ -46,6 +49,10 @@ export async function getServerSideProps(context) {
 }
 
 export default function RecsFriendsPage({ data: session }) {
+	const { flipped, setFlipped } = useData();
+	const toggleFlip = () => {
+		setFlipped(!flipped);
+	};
 	const { register, handleSubmit } = useForm();
 	// Get the users friends
 	console.log('calling trpc getUsers');
@@ -89,10 +96,36 @@ export default function RecsFriendsPage({ data: session }) {
 	};
 
 	return (
-		<div className={styles.main}>
-			<Header session={session} />
-			<HeaderMenu session={session} selected="friends" />
-			<form className={styles.newFriendForm} onSubmit={handleSubmit(onSubmit)}>
+		<div className={styles.flipContainer}>
+			<Header session={session} flip={flipped} toggleFlip={toggleFlip} />
+			<HeaderMenuTwo selected="recommendations" flip={flipped} />
+
+			<div
+				className={`${styles.cardFlipper} ${flipped ? styles.performFlip : ''}`}
+			>
+				<div className={styles.cardFrontFace}>
+					<Friends
+						handleSubmit={handleSubmit}
+						onSubmit={onSubmit}
+						register={register}
+						users={users}
+						friendsData={friendsData}
+						session={session}
+					/>
+				</div>
+
+				<div className={styles.cardBackFace}>
+					<Enemies
+						handleSubmit={handleSubmit}
+						onSubmit={onSubmit}
+						register={register}
+						users={users}
+						friendsData={friendsData}
+						session={session}
+					/>
+				</div>
+			</div>
+			{/* <form className={styles.newFriendForm} onSubmit={handleSubmit(onSubmit)}>
 				<p className={styles.newFriendTitle}>Add a new friend? </p>
 				<select {...register('newFriend')} className={styles.newFriendSelect}>
 					<option disabled selected value>
@@ -137,7 +170,7 @@ export default function RecsFriendsPage({ data: session }) {
 				) : (
 					<Loading />
 				)}
-			</div>
+			</div> */}
 		</div>
 	);
 }

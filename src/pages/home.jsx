@@ -4,10 +4,11 @@ import { unstable_getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
-import Recommendations from '../components/Recomendations/Recommendations';
+import Recommendations from '../components/Recommendations/Recommendations';
 import Hell from '../components/Hell/Hell';
 import Header from '../components/Header/Header';
 import HeaderMenuTwo from '../components/HeaderMenuTwo/HeaderMenuTwo';
+import { useData } from '../utils/DataContext';
 
 const trpcOptions = {
 	refetchInterval: false,
@@ -47,9 +48,10 @@ export async function getServerSideProps(context) {
 }
 
 export default function RecsHelloPage({ data: session }) {
+	const { flipped, setFlipped } = useData();
 	const [flip, setFlip] = useState(false);
 	const toggleFlip = () => {
-		setFlip(!flip);
+		setFlipped(!flipped);
 	};
 
 	console.log('calling trpc getRecommendations');
@@ -61,11 +63,11 @@ export default function RecsHelloPage({ data: session }) {
 
 	return (
 		<div className={styles.flipContainer}>
-			<Header session={session} flip={flip} toggleFlip={toggleFlip} />
-			<HeaderMenuTwo selected="recommendations" flip={flip} />
-			{/* <button onClick={toggleFlip}>Upside-Down</button> */}
+			<Header session={session} flip={flipped} toggleFlip={toggleFlip} />
+			<HeaderMenuTwo selected="recommendations" flip={flipped} />
+
 			<div
-				className={`${styles.cardFlipper} ${flip ? styles.performFlip : ''}`}
+				className={`${styles.cardFlipper} ${flipped ? styles.performFlip : ''}`}
 			>
 				<div className={styles.cardFrontFace}>
 					<Recommendations

@@ -38,7 +38,7 @@ const HeaderMenu = ({ selected, flip }) => {
 					Hates
 				</Link>
 				<Link
-					href="/enemies"
+					href="/friends"
 					className={
 						selected === 'enemies'
 							? `${styles.menuTab} ${styles.selected}`
