@@ -13,11 +13,7 @@
 	justify-content: stretch;
 	align-items: center;
 	padding-inline: 1rem;
-}
-
-.signOutButton {
-	padding: 0.1rem 0.5rem;
-	font-weight: normal;
+	position: relative;
 }
 
 .imageContainer {
@@ -25,6 +21,17 @@
 	width: 4rem;
 	border-radius: 50%;
 	overflow: hidden;
+	cursor: pointer;
+}
+
+.signOutButton {
+	position: absolute;
+	font-size: larger;
+	padding: 0.2rem 0.7rem;
+	font-weight: normal;
+	z-index: inherit;
+
+	transform: translateX(5rem);
 }
 
 .flex {
