@@ -1,0 +1,14 @@
+.main {
+	width: 100%;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+/* .fixed {
+	position: sticky;
+} */

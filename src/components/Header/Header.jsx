@@ -3,10 +3,11 @@ import ButtonOne from '../ButtonOne/ButtonOne';
 import styles from './Header.module.css';
 import { signOut } from 'next-auth/react';
 import { Sansita_Swashed } from '@next/font/google';
+import Logo from '../Logo/Logo';
 
 const sansita = Sansita_Swashed({ subsets: ['latin'] });
 
-const Header = ({ session, flip }) => {
+const Header = ({ session, flip, toggleFlip }) => {
 	return (
 		<div className={styles.hero}>
 			<div className={styles.nameBadge}>
@@ -33,9 +34,13 @@ const Header = ({ session, flip }) => {
 					/>
 				</div>
 			</div>
-			<div className={!flip ? styles.titleContainer : styles.flip}>
-				<h1 className={`${styles.title} ${sansita.className}`}>Recs</h1>
-			</div>
+			<Logo flip={flip} toggleFlip={toggleFlip} />
+			{/* <div
+				className={!flip ? styles.titleContainer : styles.flip}
+				onClick={toggleFlip}
+			>
+				<div className={`${styles.title} ${sansita.className}`}>Recs</div>
+			</div> */}
 		</div>
 	);
 };

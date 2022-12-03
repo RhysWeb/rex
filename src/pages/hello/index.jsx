@@ -4,8 +4,12 @@ import Heaven from '../../components/Heaven/Heaven';
 import Hell from '../../components/Hell/Helltwo';
 import { trpc } from '../../utils/trpc';
 import { unstable_getServerSession } from 'next-auth';
-import { authOptions } from './../api/auth/[...nextauth]';
+import { authOptions } from '../api/auth/[...nextauth]';
 import { signIn } from 'next-auth/react';
+import Header from '../../components/Header/Header';
+import HeaderMenu from '../../components/HeaderMenu/HeaderMenu';
+import Heaventwo from '../../components/Heaventwo/Heaventwo';
+import Helltwo from '../../components/Hell/Helltwo';
 
 const trpcOptions = {
 	refetchInterval: false,
@@ -44,7 +48,7 @@ export async function getServerSideProps(context) {
 	}
 }
 
-export default function RecsHellPage({ data: session }) {
+export default function RecsHelloPage({ data: session }) {
 	const [flip, setFlip] = useState(false);
 	const toggleFlip = () => {
 		setFlip(!flip);
@@ -59,12 +63,14 @@ export default function RecsHellPage({ data: session }) {
 
 	return (
 		<div className={styles.flipContainer}>
-			<button onClick={toggleFlip}>Upside-Down</button>
+			<Header session={session} flip={flip} toggleFlip={toggleFlip} />
+			<HeaderMenu selected="recommendations" />
+			{/* <button onClick={toggleFlip}>Upside-Down</button> */}
 			<div
 				className={`${styles.cardFlipper} ${flip ? styles.performFlip : ''}`}
 			>
 				<div className={styles.cardFrontFace}>
-					<Heaven
+					<Heaventwo
 						recs={recommendations}
 						refetch={refetchRecommendations}
 						session={session}
@@ -72,7 +78,7 @@ export default function RecsHellPage({ data: session }) {
 				</div>
 
 				<div className={styles.cardBackFace}>
-					<Hell
+					<Helltwo
 						recs={recommendations}
 						refetch={refetchRecommendations}
 						session={session}
