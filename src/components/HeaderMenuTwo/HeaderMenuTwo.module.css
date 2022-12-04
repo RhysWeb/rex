@@ -8,29 +8,39 @@
 	width: 100vw;
 	position: relative;
 	transition: transform 2s;
-}
-
-.clippedTab {
-	background-color: var(--surface2);
-	position: relative;
-	padding-inline: 1.5rem;
-	padding-block: 0.5rem;
-	box-shadow: var(--shadow-4);
-	clip-path: polygon(0% 0%, 100% 0%, 90% 200%, 10% 200%);
-	cursor: pointer;
-	border-top: var(--brand2) solid 1px;
-}
-
-.selected::after {
-	background: linear-gradient(hsl(31, 59%, 83%), hsl(40, 69%, 53%));
+	/* border-bottom: solid 2px var(--surface-4); */
+	background-color: var(--surface-3);
+	z-index: 10;
 }
 
 .selected {
 	font-weight: bold;
+	border: solid 2px var(--surface-4);
+	border-top: inherit;
+	background-color: var(--surface2);
+	z-index: 1;
+}
+
+.unselected {
+	background-color: inherit;
+	font-weight: 400;
+	z-index: -1;
+}
+
+.unselected:hover {
+	transition: background-color 0.1s;
+	background-color: var(--surface-4);
+	/* font-weight: 500; */
 }
 
 .menuTab {
-	color: inherit;
+	color: var(--text2);
+	padding-inline: 2rem;
+	padding-bottom: 0.5rem;
+	height: 1rem;
+	border-bottom-right-radius: 20px;
+	border-bottom-left-radius: 20px;
+	text-decoration: none;
 }
 
 .hidden {
@@ -42,4 +52,8 @@
 	position: absolute;
 	transform: translateX(0px);
 	transition: transform 2s;
+	/* display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: stretch; */
 }

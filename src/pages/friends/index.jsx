@@ -1,5 +1,5 @@
 import styles from './friendsPage.module.css';
-import { trpc } from '../../utils/trpc';
+import { trpc, trpcOptions } from '../../utils/trpc';
 import { Loading } from '../../components/Loading/Loading';
 import { NewRec } from '../../components/NewRec/NewRec';
 import { Recommendation } from '../../components/Recommendation/Recommendation';
@@ -13,13 +13,8 @@ import { useData } from '../../utils/DataContext';
 import Friends from '../../components/Friends/Friends';
 import Enemies from '../../components/Enemies/Enemies';
 
-const trpcOptions = {
-	refetchInterval: false,
-	refetchOnReconnect: false,
-	refetchOnWindowFocus: false,
-};
-
 export async function getServerSideProps(context) {
+	// return getServerSession(context);
 	const session = await unstable_getServerSession(
 		context.req,
 		context.res,
@@ -53,76 +48,37 @@ export default function RecsFriendsPage({ data: session }) {
 	const toggleFlip = () => {
 		setFlipped(!flipped);
 	};
-	const { register, handleSubmit } = useForm();
-	// Get the users friends
-	console.log('calling trpc getUsers');
+
+	// Get all users for the dropdown (make this better)
 	const { data: users, refetch: refetchUsers } = trpc.useQuery([
 		'reviewsUser.getUsers',
 	]);
 
+	// Get the users friends
 	const { data: friendsData, refetch: refetchFriends } = trpc.useQuery([
 		'recs.getFriends',
 		{ id: session.user.id },
 	]);
 
-	const addFriendMutation = trpc.useMutation(['recs.addFriend'], {
-		onSuccess: () => {
-			console.log('success');
-			refetchFriends();
-		},
-	});
-
-	const onSubmit = (data) => {
-		console.table(data);
-		addFriendMutation.mutate({
-			id: session.user.id,
-			friendId: data.newFriend,
-		});
-	};
-
-	const delFriendMutation = trpc.useMutation(['recs.delFriend'], {
-		onSuccess: () => {
-			console.log('friend successfully deleted');
-			refetchFriends();
-		},
-	});
-
-	const removeFriend = (friendId) => {
-		console.table(friendId);
-		delFriendMutation.mutate({
-			id: session.user.id,
-			friendId: friendId,
-		});
-	};
-
 	return (
 		<div className={styles.flipContainer}>
 			<Header session={session} flip={flipped} toggleFlip={toggleFlip} />
-			<HeaderMenuTwo selected="recommendations" flip={flipped} />
+			<HeaderMenuTwo selected="Frenemies" flip={flipped} />
 
 			<div
 				className={`${styles.cardFlipper} ${flipped ? styles.performFlip : ''}`}
 			>
 				<div className={styles.cardFrontFace}>
 					<Friends
-						handleSubmit={handleSubmit}
-						onSubmit={onSubmit}
-						register={register}
 						users={users}
 						friendsData={friendsData}
 						session={session}
+						refetchFriends={refetchFriends}
 					/>
 				</div>
 
 				<div className={styles.cardBackFace}>
-					<Enemies
-						handleSubmit={handleSubmit}
-						onSubmit={onSubmit}
-						register={register}
-						users={users}
-						friendsData={friendsData}
-						session={session}
-					/>
+					<Enemies users={users} friendsData={friendsData} session={session} />
 				</div>
 			</div>
 			{/* <form className={styles.newFriendForm} onSubmit={handleSubmit(onSubmit)}>

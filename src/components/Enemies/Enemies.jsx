@@ -1,15 +1,42 @@
 import styles from './Enemies.module.css';
 import { Loading } from '../Loading/Loading';
 import Link from 'next/link';
+import { useForm } from 'react-hook-form';
+import { trpc, trpcOptions } from '../../utils/trpc';
 
-export default function Enemies({
-	handleSubmit,
-	onSubmit,
-	register,
-	users,
-	friendsData,
-	session,
-}) {
+export default function Enemies({ users, friendsData, session }) {
+	const { register, handleSubmit } = useForm();
+
+	const addFriendMutation = trpc.useMutation(['recs.addFriend'], {
+		onSuccess: () => {
+			console.log('success');
+			refetchFriends();
+		},
+	});
+
+	const onSubmit = (data) => {
+		console.table(data);
+		addFriendMutation.mutate({
+			id: session.user.id,
+			friendId: data.newFriend,
+		});
+	};
+
+	const delFriendMutation = trpc.useMutation(['recs.delFriend'], {
+		onSuccess: () => {
+			console.log('friend successfully deleted');
+			refetchFriends();
+		},
+	});
+
+	const removeFriend = (friendId) => {
+		console.table(friendId);
+		delFriendMutation.mutate({
+			id: session.user.id,
+			friendId: friendId,
+		});
+	};
+
 	return (
 		<>
 			<form className={styles.newFriendForm} onSubmit={handleSubmit(onSubmit)}>

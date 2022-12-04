@@ -1,9 +1,8 @@
 import Head from 'next/head';
-import styles from './Layout.module.css';
-import { Sansita_Swashed } from '@next/font/google';
+import { useData } from '../../utils/DataContext';
 
-const sansita = Sansita_Swashed({ subsets: ['latin'] });
 export const Layout = (props) => {
+	const { flipped, setFlipped } = useData();
 	const { children, ...customMeta } = props;
 	const meta = {
 		title: 'Recs',
@@ -49,7 +48,7 @@ export const Layout = (props) => {
 				<meta name="twitter:image" content={meta.image} />
 			</Head>
 
-			<main>{children}</main>
+			<main color-scheme={flipped ? 'grape' : ''}>{children}</main>
 		</>
 	);
 };

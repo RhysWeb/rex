@@ -5,9 +5,11 @@ import { Loading } from '../../../components/Loading/Loading';
 import { NewRec } from '../../../components/NewRec/NewRec';
 import { Recommendation } from '../../../components/Recommendation/Recommendation';
 import Header from '../../../components/Header/Header';
-import HeaderMenu from '../../../components/HeaderMenu/HeaderMenu';
+import HeaderMenuTwo from '../../../components/HeaderMenuTwo/HeaderMenuTwo';
 import { unstable_getServerSession } from 'next-auth';
 import { authOptions } from '../../api/auth/[...nextauth]';
+import { useData } from '../../../utils/DataContext';
+
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
 
@@ -47,6 +49,7 @@ export async function getServerSideProps(context) {
 }
 
 export default function FriendPage({ data: session }) {
+	const { flipped, setFlipped } = useData();
 	const router = useRouter();
 	const { id } = router.query;
 
@@ -61,7 +64,7 @@ export default function FriendPage({ data: session }) {
 	return (
 		<div className={styles.main}>
 			<Header session={session} />
-			<HeaderMenu session={session} selected="friends" />
+			<HeaderMenuTwo selected="Frenemies" flip={flipped} />
 
 			{recommendations ? (
 				<div>

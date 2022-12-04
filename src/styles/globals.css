@@ -23,6 +23,7 @@ html {
 	--surface2-light: var(--gray-0);
 	--surface3-light: var(--gray-1);
 	--surface4-light: var(--gray-3);
+	--surface5-light: var(--red-6);
 
 	/* dark mode colours */
 	--brand-dark: var(--orange-5);
@@ -35,6 +36,7 @@ html {
 	--surface2-dark: var(--gray-8);
 	--surface3-dark: var(--gray-7);
 	--surface4-dark: var(--gray-6);
+	--surface5-dark: var(--red-6);
 
 	/* dim mode colours */
 	--brand-dim: var(--orange-4);
@@ -49,16 +51,17 @@ html {
 	--surface4-dim: var(--gray-5);
 
 	/* grape mode colours */
-	--brand-grape: var(--grape-5);
-	--brand2-grape: var(--grape-2);
+	--brand-grape: var(--red-5);
+	--brand2-grape: var(--orange-2);
 	--brandSecondary-grape: var(--gray-2);
-	--text1-grape: var(--grape-9);
-	--text2-grape: var(--grape-7);
+	--text1-grape: var(--gray-9);
+	--text2-grape: var(--red-7);
 	--link-grape: var(--blue-4);
-	--surface1-grape: var(--grape-0);
-	--surface2-grape: var(--grape-1);
+	--surface1-grape: var(--red-0);
+	--surface2-grape: var(--red-1);
 	--surface3-grape: var(--grape-2);
 	--surface4-grape: var(--grape-3);
+	--surface5-grape: var(--red-6);
 }
 
 :root {
@@ -72,6 +75,7 @@ html {
 	--surface2: var(--surface2-light);
 	--surface3: var(--surface3-light);
 	--surface4: var(--surface4-light);
+	--surface5: var(--surface5-light);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -86,6 +90,7 @@ html {
 		--surface2: var(--surface2-dark);
 		--surface3: var(--surface3-dark);
 		--surface4: var(--surface4-dark);
+		--surface5: var(--surface5-dark);
 	}
 }
 
@@ -115,6 +120,7 @@ html {
 	--surface2: var(--surface2-grape);
 	--surface3: var(--surface3-grape);
 	--surface4: var(--surface4-grape);
+	--surface5: var(--surface5-grape);
 }
 
 html {

@@ -38,9 +38,9 @@ export default function NotSignedIn() {
 			<button
 				onClick={() => {
 					if (session) {
-						router.push('/home');
+						router.push('/recs');
 					} else {
-						signIn('google', { callbackUrl: '/home' });
+						signIn('google', { callbackUrl: '/recs' });
 						console.log('fired');
 					}
 				}}

@@ -1,15 +1,47 @@
 import styles from './Friends.module.css';
 import { Loading } from '../Loading/Loading';
 import Link from 'next/link';
+import { useForm } from 'react-hook-form';
+import { trpc } from '../../utils/trpc';
 
 export default function Friends({
-	handleSubmit,
-	onSubmit,
-	register,
 	users,
 	friendsData,
 	session,
+	refetchFriends,
 }) {
+	const { register, handleSubmit } = useForm();
+
+	const addFriendMutation = trpc.useMutation(['recs.addFriend'], {
+		onSuccess: () => {
+			console.log('success');
+			refetchFriends();
+		},
+	});
+
+	const onSubmit = (data) => {
+		console.table(data);
+		addFriendMutation.mutate({
+			id: session.user.id,
+			friendId: data.newFriend,
+		});
+	};
+
+	const delFriendMutation = trpc.useMutation(['recs.delFriend'], {
+		onSuccess: () => {
+			console.log('friend successfully deleted');
+			refetchFriends();
+		},
+	});
+
+	const removeFriend = (friendId) => {
+		console.table(friendId);
+		delFriendMutation.mutate({
+			id: session.user.id,
+			friendId: friendId,
+		});
+	};
+
 	return (
 		<>
 			<form className={styles.newFriendForm} onSubmit={handleSubmit(onSubmit)}>

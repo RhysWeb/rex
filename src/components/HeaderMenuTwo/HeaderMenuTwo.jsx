@@ -1,16 +1,16 @@
 import styles from './HeaderMenuTwo.module.css';
 import Link from 'next/link';
 
-const HeaderMenu = ({ selected, flip }) => {
+const HeaderMenuTwo = ({ selected, flip }) => {
 	return (
 		<div className={styles.container}>
 			<div className={flip === true ? styles.hidden : styles.unhidden}>
 				<Link
-					href="/home"
+					href="/recs"
 					className={
 						selected === 'recommendations'
 							? `${styles.menuTab} ${styles.selected}`
-							: styles.perspectiveTab
+							: `${styles.menuTab} ${styles.unselected}`
 					}
 				>
 					Recommendations
@@ -18,9 +18,9 @@ const HeaderMenu = ({ selected, flip }) => {
 				<Link
 					href="/friends"
 					className={
-						selected === 'friends'
+						selected === 'Frenemies'
 							? `${styles.menuTab} ${styles.selected}`
-							: styles.perspectiveTab
+							: `${styles.menuTab} ${styles.unselected}`
 					}
 				>
 					Friends
@@ -28,11 +28,11 @@ const HeaderMenu = ({ selected, flip }) => {
 			</div>
 			<div className={flip === false ? styles.hidden : styles.unhidden}>
 				<Link
-					href="/home"
+					href="/recs"
 					className={
-						selected === 'hates'
+						selected === 'recommendations'
 							? `${styles.menuTab} ${styles.selected}`
-							: styles.perspectiveTab
+							: `${styles.menuTab} ${styles.unselected}`
 					}
 				>
 					Hates
@@ -40,9 +40,9 @@ const HeaderMenu = ({ selected, flip }) => {
 				<Link
 					href="/friends"
 					className={
-						selected === 'enemies'
+						selected === 'Frenemies'
 							? `${styles.menuTab} ${styles.selected}`
-							: styles.perspectiveTab
+							: `${styles.menuTab} ${styles.unselected}`
 					}
 				>
 					Enemies
@@ -52,4 +52,4 @@ const HeaderMenu = ({ selected, flip }) => {
 	);
 };
 
-export default HeaderMenu;
+export default HeaderMenuTwo;

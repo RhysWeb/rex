@@ -1,20 +1,13 @@
-import styles from './recsHomePage.module.css';
-import { trpc } from '../utils/trpc';
+import styles from './recsPage.module.css';
+import { trpc, trpcOptions } from '../../utils/trpc';
 import { unstable_getServerSession } from 'next-auth';
-import { authOptions } from './api/auth/[...nextauth]';
+import { authOptions } from '.././api/auth/[...nextauth]';
 import { signIn } from 'next-auth/react';
-import { useState } from 'react';
-import Recommendations from '../components/Recommendations/Recommendations';
-import Hates from '../components/Hates/Hates';
-import Header from '../components/Header/Header';
-import HeaderMenuTwo from '../components/HeaderMenuTwo/HeaderMenuTwo';
-import { useData } from '../utils/DataContext';
-
-const trpcOptions = {
-	refetchInterval: false,
-	refetchOnReconnect: false,
-	refetchOnWindowFocus: false,
-};
+import Recommendations from '../../components/Recommendations/Recommendations';
+import Hates from '../../components/Hates/Hates';
+import Header from '../../components/Header/Header';
+import HeaderMenuTwo from '../../components/HeaderMenuTwo/HeaderMenuTwo';
+import { useData } from '../../utils/DataContext';
 
 export async function getServerSideProps(context) {
 	const session = await unstable_getServerSession(
@@ -47,19 +40,23 @@ export async function getServerSideProps(context) {
 	}
 }
 
-export default function RecsHelloPage({ data: session }) {
+export default function RecsPage({ data: session }) {
 	const { flipped, setFlipped } = useData();
-	const [flip, setFlip] = useState(false);
 	const toggleFlip = () => {
 		setFlipped(!flipped);
 	};
 
-	console.log('calling trpc getRecommendations');
 	const { data: recommendations, refetch: refetchRecommendations } =
 		trpc.useQuery(
 			['recs.getRecommendations', { authorId: session.user.id }],
 			trpcOptions
 		);
+
+	// const { data: hates, refetch: refetchHates } =
+	// 	trpc.useQuery(
+	// 		['recs.getHates', { authorId: session.user.id }],
+	// 		trpcOptions
+	// 	);
 
 	return (
 		<div className={styles.flipContainer}>

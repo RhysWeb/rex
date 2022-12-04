@@ -1,10 +1,9 @@
-import styles from './HellPage.module.css';
-import { trpc } from '../../utils/trpc';
+import styles from './HatesPage.module.css';
 import { NewRec } from '../NewRec/NewRec';
 import { Recommendation } from '../Recommendation/Recommendation';
 import { Loading } from '../Loading/Loading';
 
-export default function Hell({ recs, refetch, session }) {
+export default function Hates({ recs, refetch, session }) {
 	// Get the users recommendations
 
 	return (
