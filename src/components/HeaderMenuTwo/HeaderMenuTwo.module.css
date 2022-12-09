@@ -12,6 +12,7 @@
 	background-color: var(--surface-3);
 	z-index: 10;
 	transform: translateY(-2px);
+	border-top: var(--brand) 2px solid;
 }
 
 .selected {

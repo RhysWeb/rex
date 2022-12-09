@@ -23,9 +23,11 @@ export async function getServerSideProps(context) {
 
 	if (!session) {
 		console.log('no session');
+		signIn('google', { callbackUrl: '/friends' });
+
 		return {
 			redirect: {
-				destination: '/login',
+				destination: '/',
 				permanent: false,
 			},
 		};
@@ -38,7 +40,7 @@ export async function getServerSideProps(context) {
 			},
 		};
 	} else {
-		console.log('success');
+		console.log('Session and user role');
 		return { props: { data: session } };
 	}
 }

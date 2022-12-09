@@ -2,11 +2,8 @@ import Image from 'next/image';
 import ButtonOne from '../ButtonOne/ButtonOne';
 import styles from './Header.module.css';
 import { signOut } from 'next-auth/react';
-import { Sansita_Swashed } from '@next/font/google';
 import Logo from '../Logo/Logo';
 import { useState } from 'react';
-
-const sansita = Sansita_Swashed({ subsets: ['latin'] });
 
 const Header = ({ session, flip, toggleFlip }) => {
 	const [showLogout, setShowLogout] = useState(false);
