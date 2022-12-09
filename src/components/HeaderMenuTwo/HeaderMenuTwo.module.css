@@ -47,12 +47,12 @@
 
 .hidden {
 	position: absolute;
-	transform: translateX(-500px) translateY(-1px);
+	transform: translateX(-500px) translateY(-2px);
 	transition: transform 2s;
 }
 .unhidden {
 	position: absolute;
-	transform: translateX(0px) translateY(-1px);
+	transform: translateX(0px) translateY(-2px);
 	transition: transform 2s;
 	/* display: flex;
 	flex-direction: row;
