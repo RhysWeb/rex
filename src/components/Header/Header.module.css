@@ -4,7 +4,7 @@
 	justify-content: space-between;
 	align-items: stretch;
 	background-color: var(--surface2);
-	z-index: 4;
+	z-index: 1;
 	border-bottom: var(--brand) 3px solid;
 }
 
