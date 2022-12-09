@@ -10,9 +10,9 @@
 	transition: transform 2s;
 	/* border-bottom: solid 2px var(--surface-4); */
 	background-color: var(--surface-3);
-	z-index: 10;
-	transform: translateY(-2px);
-	border-top: var(--brand) 2px solid;
+	z-index: 1;
+
+	border-top: var(--brand) 3px solid;
 }
 
 .selected {
@@ -43,6 +43,7 @@
 	border-bottom-right-radius: 20px;
 	border-bottom-left-radius: 20px;
 	text-decoration: none;
+	transform: translateY(-2px);
 	/* transform: translateY(2px); */
 }
 
