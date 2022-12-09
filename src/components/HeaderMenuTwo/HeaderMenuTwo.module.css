@@ -14,6 +14,16 @@
 
 	border-top: var(--brand) 3px solid;
 }
+.menuTab {
+	color: var(--text2);
+	padding-inline: 2rem;
+	padding-bottom: 0.5rem;
+	height: 1rem;
+	border-bottom-right-radius: 20px;
+	border-bottom-left-radius: 20px;
+	text-decoration: none;
+	/* transform: translateY(2px); */
+}
 
 .selected {
 	font-weight: bold;
@@ -35,26 +45,14 @@
 	/* font-weight: 500; */
 }
 
-.menuTab {
-	color: var(--text2);
-	padding-inline: 2rem;
-	padding-bottom: 0.5rem;
-	height: 1rem;
-	border-bottom-right-radius: 20px;
-	border-bottom-left-radius: 20px;
-	text-decoration: none;
-	transform: translateY(-2px);
-	/* transform: translateY(2px); */
-}
-
 .hidden {
 	position: absolute;
-	transform: translateX(-500px);
+	transform: translateX(-500px) translateY(-1px);
 	transition: transform 2s;
 }
 .unhidden {
 	position: absolute;
-	transform: translateX(0px);
+	transform: translateX(0px) translateY(-1px);
 	transition: transform 2s;
 	/* display: flex;
 	flex-direction: row;
