@@ -41,25 +41,12 @@ export async function getServerSideProps(context) {
 	}
 }
 
-function sleep(ms) {
-	return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 //   async function delayedGreeting() {
 // 	console.log("Hello");
 // 	await sleep(2000);
 
 export default function RecsPage({ data: session }) {
-	const [flipping, setFlipping] = useState(false);
 	const { flipped, setFlipped } = useData();
-	const toggleFlip = async () => {
-		if (!flipping) {
-			setFlipped(!flipped);
-			setFlipping(true);
-			await sleep(5000);
-			setFlipping(false);
-		}
-	};
 
 	const { data: recommendations, refetch: refetchRecommendations } =
 		trpc.useQuery(
@@ -69,7 +56,7 @@ export default function RecsPage({ data: session }) {
 
 	return (
 		<div className={styles.flipContainer}>
-			<Header session={session} flip={flipped} toggleFlip={toggleFlip} />
+			<Header session={session} flip={flipped} />
 			<HeaderMenuTwo selected="recommendations" flip={flipped} />
 
 			<div

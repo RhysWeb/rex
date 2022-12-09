@@ -47,9 +47,6 @@ export async function getServerSideProps(context) {
 
 export default function RecsFriendsPage({ data: session }) {
 	const { flipped, setFlipped } = useData();
-	const toggleFlip = () => {
-		setFlipped(!flipped);
-	};
 
 	// Get all users for the dropdown (make this better)
 	const { data: users, refetch: refetchUsers } = trpc.useQuery([
@@ -64,7 +61,7 @@ export default function RecsFriendsPage({ data: session }) {
 
 	return (
 		<div className={styles.flipContainer}>
-			<Header session={session} flip={flipped} toggleFlip={toggleFlip} />
+			<Header session={session} flip={flipped} />
 			<HeaderMenuTwo selected="Frenemies" flip={flipped} />
 
 			<div
@@ -83,52 +80,6 @@ export default function RecsFriendsPage({ data: session }) {
 					<Enemies users={users} friendsData={friendsData} session={session} />
 				</div>
 			</div>
-			{/* <form className={styles.newFriendForm} onSubmit={handleSubmit(onSubmit)}>
-				<p className={styles.newFriendTitle}>Add a new friend? </p>
-				<select {...register('newFriend')} className={styles.newFriendSelect}>
-					<option disabled selected value>
-						{' '}
-						-- select an option --{' '}
-					</option>
-					{users?.map((user) => {
-						if (user.id !== session.user.id) {
-							return (
-								<option key={user.id} value={user.id}>
-									{`${user.name}🔸(${user.email})`}
-								</option>
-							);
-						}
-					})}
-				</select>
-				<input type="submit" className={styles.newFriendButton} />
-			</form>
-			<div className={styles.newFriendForm}>
-				<p className={styles.newFriendTitle}>Your friends:</p>
-				{friendsData ? (
-					friendsData.friends.friends?.map((friend) => {
-						return (
-							<div key={friend.id} className={styles.friend}>
-								<Link
-									className={styles.friendName}
-									href={`/friends/${friend.id}`}
-								>
-									{friend.name}
-								</Link>
-								<button
-									className={styles.friendRemoveButton}
-									onClick={() => {
-										removeFriend(friend.id);
-									}}
-								>
-									Remove
-								</button>
-							</div>
-						);
-					})
-				) : (
-					<Loading />
-				)}
-			</div> */}
 		</div>
 	);
 }
