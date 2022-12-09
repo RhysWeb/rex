@@ -11,13 +11,13 @@
 	/* border-bottom: solid 2px var(--surface-4); */
 	background-color: var(--surface-3);
 	z-index: 10;
-	transform: translateY(-1px);
+	transform: translateY(-2px);
 }
 
 .selected {
 	font-weight: bold;
 	border: solid 2px var(--surface-4);
-	border-top: inherit;
+	border-top: var(--surface-2);
 	background-color: var(--surface2);
 	z-index: 2;
 }
